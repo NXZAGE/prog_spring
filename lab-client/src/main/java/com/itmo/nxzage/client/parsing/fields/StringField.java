@@ -11,8 +11,8 @@ public class StringField implements Field<String> {
 
     static {
         // TODO make more spec simbols
-        MULTIWORD_PATTERN = Pattern.compile("\\\"(\\w\\d\\s_\\-\\*\\.\\+\\/\\\\]*)\\\"");
-        SINGLEWORD_PATTERN = Pattern.compile("[\\w\\d_\\\\-\\\\*\\\\.\\\\+\\\\/\\\\\\\\]+");
+        MULTIWORD_PATTERN = Pattern.compile("\\\"([\\w\\d\\s_\\-\\*\\.\\+\\/\\\\]*)\\\"");
+        SINGLEWORD_PATTERN = Pattern.compile("[\\w\\d_\\-\\*\\.\\+\\/\\\\]+");
     }
 
     public StringField() {
