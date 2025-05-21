@@ -36,7 +36,7 @@ public class Command {
         if (args == null) {
             return;
         }
-        args.forEach((key, value) -> this.args.merge(key, value, (oldV, _) -> oldV));
+        args.forEach((key, value) -> this.args.merge(key, value, (oldV, newV) -> oldV));
     }
 
     public boolean isClient() {
@@ -71,7 +71,7 @@ public class Command {
 
     public Map<String, Object> toMap() {
         Map<String, Object> result = new HashMap<String, Object>();
-        args.forEach((key, value) -> result.merge(key, value, (oldV, _) -> oldV));
+        args.forEach((key, value) -> result.merge(key, value, (oldV, newV) -> oldV));
         result.put("name", name);
         return result;
     }
