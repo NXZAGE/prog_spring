@@ -9,7 +9,7 @@ public final class Client {
     public static void main(String[] args) {
         App app = new App();
         // TODO IMPORTANT make commandlinearg
-        String serverFilename = "./lab-server/target/storage_dir/store_file.csv";
+        String serverFilename = args[0];
         System.out.println(System.getProperty("user.dir"));
         var server = new com.itmo.nxzage.server.App();
         server.init(serverFilename);

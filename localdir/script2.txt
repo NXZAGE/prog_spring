@@ -1,0 +1,67 @@
+help
+info
+show
+add
+PersonName
+10.5 20.3
+180.5
+80
+passport123456
+USA
+1.1 2 3 LocationName
+update 1
+NewName
+10 20
+170.0
+70
+newPassportID
+FRANCE
+1 2 3 NewLocation
+remove_by_id 1
+save
+add
+InvalidPerson
+-1000 1000
+-50
+-100
+ps
+GERMANY
+invalid location format
+update -1
+name
+10 10
+100
+50
+pass
+USA
+1 1 1 Loc
+remove_by_id abc
+filter_starts_with_passport_id
+print_field_ascending_nationality invalid_arg
+print_field_descending_nationality
+remove_lower
+1
+add_if_min
+PersonMin
+10 10
+height
+70
+p12345
+USA
+1 1 1 MinLoc
+add_if_max
+PersonMax
+10 10
+100
+weight
+p12345
+null
+1 1 1 MaxLoc
+execute_script localdir/script1.txt
+execute_script localdir/script1.txt
+execute_script localdir/script1.txt
+execute_script localdir/script1.txt
+execute_script localdir/script1.txt
+show
+info
+save
