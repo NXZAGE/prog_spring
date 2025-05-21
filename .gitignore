@@ -2,6 +2,7 @@
 /lab-client/target/
 /lab-common/target/
 /lab-server/target/
+/localdir/
 *.iml
 .idea
 *.jar
