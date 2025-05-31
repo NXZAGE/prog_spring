@@ -2,6 +2,7 @@ package com.itmo.nxzage.client.io;
 
 import java.util.ArrayList;
 import java.util.EmptyStackException;
+import java.util.LinkedList;
 import java.util.Stack;
 import com.itmo.nxzage.client.exceptions.InfiniteReqursionException;
 import com.itmo.nxzage.client.exceptions.InputSourceHoldConflictException;
@@ -13,11 +14,11 @@ import com.itmo.nxzage.client.exceptions.InvalidSourceHolderReleaseException;
  * <p> Реализует полный интерфейс источника ввода </p>
  */
 public final class InputManager implements InputSource {
-    private ArrayList<InputSource> sources;
+    private LinkedList<InputSource> sources;
     private Stack<Object> sourceHolders;
 
     {
-        sources = new ArrayList<InputSource>();
+        sources = new LinkedList<InputSource>();
         sourceHolders = new Stack<Object>();
     }
 
