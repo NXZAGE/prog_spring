@@ -2,7 +2,9 @@ package com.itmo.nxzage.client.io;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.net.InetSocketAddress;
 import java.util.Scanner;
+import com.itmo.nxzage.common.util.data.Person;
 
 public final class FileInput implements InputSource {
     private String filename;
@@ -40,5 +42,17 @@ public final class FileInput implements InputSource {
     @Override
     public String info() {
         return String.format("%s file input", filename);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other)
+            return true;
+        if (!(other instanceof FileInput))
+            return false;
+
+        FileInput otherSource = (FileInput) other;
+
+        return this.info().equals(otherSource.info());
     }
 }

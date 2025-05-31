@@ -1,7 +1,9 @@
 package com.itmo.nxzage.client.io;
 
+import java.util.ArrayList;
 import java.util.EmptyStackException;
 import java.util.Stack;
+import com.itmo.nxzage.client.exceptions.InfiniteReqursionException;
 import com.itmo.nxzage.client.exceptions.InputSourceHoldConflictException;
 import com.itmo.nxzage.client.exceptions.InvalidSourceHolderReleaseException;
 
@@ -11,11 +13,11 @@ import com.itmo.nxzage.client.exceptions.InvalidSourceHolderReleaseException;
  * <p> Реализует полный интерфейс источника ввода </p>
  */
 public final class InputManager implements InputSource {
-    private Stack<InputSource> sources;
+    private ArrayList<InputSource> sources;
     private Stack<Object> sourceHolders;
 
     {
-        sources = new Stack<InputSource>();
+        sources = new ArrayList<InputSource>();
         sourceHolders = new Stack<Object>();
     }
 
@@ -44,8 +46,8 @@ public final class InputManager implements InputSource {
      * @throws {@link InputSourceHoldConflictException} при попытке переключиться в режиме удержания
      */
     public String nextLine() {
-        if (sources.peek().hasNextLine()) {
-            return sources.peek().nextLine();
+        if (sources.getLast().hasNextLine()) {
+            return sources.getLast().nextLine();
         }
         switchToPreviousSource();
         return nextLine();
@@ -53,15 +55,15 @@ public final class InputManager implements InputSource {
 
     @Override
     public boolean hasNextLine() {
-        if (sources.empty()) {
+        if (sources.isEmpty()) {
             return false;
         }
-        return sources.peek().hasNextLine();
+        return sources.getLast().hasNextLine();
     }
 
     @Override
     public boolean isInteractive() {
-        return sources.peek().isInteractive();
+        return sources.getLast().isInteractive();
     }
 
     @Override
@@ -71,7 +73,7 @@ public final class InputManager implements InputSource {
 
     @Override
     public void close() {
-        while(!sources.empty()) {
+        while(!sources.isEmpty()) {
             closeSource();
         }
     }
@@ -85,7 +87,8 @@ public final class InputManager implements InputSource {
         if (!isSourceFree()) {
             throw new InputSourceHoldConflictException();
         }
-        sources.push(source);
+        checkReqursion(source);
+        sources.add(source);
     }
 
     /**
@@ -93,7 +96,15 @@ public final class InputManager implements InputSource {
      * @throws {@link EmptyStackException} если в стеке нет источников
      */
     public void closeSource() {
-        sources.pop().close();
+        sources.removeLast().close();
+    }
+
+    public void checkReqursion(InputSource source) {
+        for (InputSource so : sources) {
+            if (source.equals(so)) {
+                throw new InfiniteReqursionException();
+            }
+        }
     }
 
     /**
@@ -101,7 +112,7 @@ public final class InputManager implements InputSource {
      * @return true, если существует хотя бы один источник, false иначе
      */
     public boolean empty() {
-        return sources.empty();
+        return sources.isEmpty();
     }
 
     /**
@@ -110,7 +121,7 @@ public final class InputManager implements InputSource {
      * @param holder объект, требующий удержания
      */
     public void holdSource(Object holder) {
-        sourceHolders.push(holder);
+        sourceHolders.add(holder);
     }
 
     /**
@@ -119,7 +130,7 @@ public final class InputManager implements InputSource {
      * @throws {@link InvalidSourceHolderReleaseException} если holder не на вершине стека
      */
     public void releaseSource(Object holder) {
-        if (sourceHolders.peek() == holder) {
+        if (sourceHolders.getLast() == holder) {
             sourceHolders.pop();
             return;
         }

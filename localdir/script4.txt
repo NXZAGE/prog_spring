@@ -1,0 +1,4 @@
+show
+execute_script localdir/script3.txt
+execute_script localdir/script3.txt
+execute_script localdir/script3.txt

@@ -8,11 +8,16 @@ import com.itmo.nxzage.common.util.exceptions.CSVParseException;
 public class PersonConverter implements CSVConverter<Person> {
 
     @Override
-    public Collection<Person> deserialize(String data) throws CSVParseException {
+    public Collection<Person> deserialize(String data){
         Collection<Person> result = new ArrayList<Person>();
         Person prototype = new Person();
         for (String line : data.split(CSVConvertable.STRING_DELIMETER)) {
-            result.add(prototype.deserializeCSV(line));
+            try {
+                result.add(prototype.deserializeCSV(line));
+            } catch (CSVParseException exc) {
+                // TODO LOGGING
+                continue;
+            }
         }
         return result;
     }
