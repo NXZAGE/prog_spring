@@ -15,15 +15,15 @@ import com.itmo.nxzage.client.exceptions.InvalidSourceHolderReleaseException;
  */
 public final class InputManager implements InputSource {
     private LinkedList<InputSource> sources;
-    private Stack<Object> sourceHolders;
+    private LinkedList<Object> sourceHolders;
 
     {
         sources = new LinkedList<InputSource>();
-        sourceHolders = new Stack<Object>();
+        sourceHolders = new LinkedList<Object>();
     }
 
     private boolean isSourceFree() {
-        return sourceHolders.empty();
+        return sourceHolders.isEmpty();
     }
 
     @SuppressWarnings("unused")
