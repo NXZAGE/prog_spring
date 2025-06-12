@@ -1,7 +1,7 @@
 package com.itmo.nxzage.common.util.data;
 
+import java.io.Serializable;
 import com.itmo.nxzage.common.util.serialization.CSVConvertable;
-import com.itmo.nxzage.common.util.serialization.Serializable;
 
 public abstract class DataElement<T extends DataElement<T>> implements Validatable, CSVConvertable<T>, Serializable, Comparable<T> {
     protected Integer id;

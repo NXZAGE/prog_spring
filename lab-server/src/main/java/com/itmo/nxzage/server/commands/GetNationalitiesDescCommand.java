@@ -1,8 +1,9 @@
 package com.itmo.nxzage.server.commands;
 
 import java.util.Collection;
-import com.itmo.nxzage.common.util.ExecutionResponse;
 import com.itmo.nxzage.common.util.data.Country;
+import com.itmo.nxzage.common.util.data.Person;
+import com.itmo.nxzage.server.ExecutionResponse;
 import com.itmo.nxzage.server.services.storage.PersonStorageServices;
 
 /**
@@ -16,7 +17,10 @@ public final class GetNationalitiesDescCommand extends PersonStorageCommand {
         Collection<Country> collection = receiver.personService().getNationalityDescending();
         response.setStatus(OK_STATUS);
         response.setMessage("Successfully loaded nationality fields");
-        response.applyData("nationalities_collection", collection);
+        response.put("nationalities_collection", collection);
+        response.setHeavy();
+        response.setHeavyKey("nationalities_collection");
+        response.setHeavyType(Country.class);
         return response;
     }
 

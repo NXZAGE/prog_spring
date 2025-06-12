@@ -7,6 +7,8 @@ public final class Server {
     }
 
     public static void main(String[] args) {
-
+        App app = new App();
+        app.init("./localdir/store_file.csv");
+        app.run();
     }
 }

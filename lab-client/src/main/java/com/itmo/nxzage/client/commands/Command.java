@@ -11,7 +11,7 @@ import java.util.Map;
  */
 public class Command {
     public static enum Type {
-        CLIENT, SERVER;
+        CLIENT, SERVER, SERVER_HEAVY;
     }
 
     private String name;
@@ -44,7 +44,7 @@ public class Command {
     }
 
     public boolean isServer() {
-        return type.equals(Type.SERVER);
+        return type.equals(Type.SERVER) || type.equals(Type.SERVER_HEAVY);
     }
 
     // * Getters and settters

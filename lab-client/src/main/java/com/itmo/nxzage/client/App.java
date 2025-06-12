@@ -11,6 +11,8 @@ import com.itmo.nxzage.client.io.ConsoleOutput;
 import com.itmo.nxzage.client.io.FileInput;
 import com.itmo.nxzage.client.io.InputManager;
 import com.itmo.nxzage.client.io.OutputHandler;
+import com.itmo.nxzage.client.net.ClientConfig;
+import com.itmo.nxzage.client.net.NetworkManager;
 import com.itmo.nxzage.client.parsing.fields.FilenameField;
 import com.itmo.nxzage.client.parsing.fields.IDField;
 import com.itmo.nxzage.client.parsing.fields.PassportPrefixField;
@@ -45,10 +47,10 @@ public class App {
         CR.recordCommand("execute_script", Type.CLIENT, new FilenameField(), null);
         CR.recordCommand("exit", Type.CLIENT, null, null);
         CR.recordCommand("info", Type.SERVER, null, null);
-        CR.recordCommand("show", Type.SERVER, null, null);
-        CR.recordCommand("print_field_ascending_nationality", Type.SERVER, null, null);
-        CR.recordCommand("print_field_descending_nationality", Type.SERVER, null, null);
-        CR.recordCommand("filter_starts_with_passport_id", Type.SERVER, new PassportPrefixField(),
+        CR.recordCommand("show", Type.SERVER_HEAVY, null, null);
+        CR.recordCommand("print_field_ascending_nationality", Type.SERVER_HEAVY, null, null);
+        CR.recordCommand("print_field_descending_nationality", Type.SERVER_HEAVY, null, null);
+        CR.recordCommand("filter_starts_with_passport_id", Type.SERVER_HEAVY, new PassportPrefixField(),
                 null);
         CR.recordCommand("add", Type.SERVER, null, new PersonArgForm());
         CR.recordCommand("add_if_max", Type.SERVER, null, new PersonArgForm());
@@ -76,6 +78,8 @@ public class App {
             throw new IllegalArgumentException("Expected server command");
         }
 
+
+        
         printer.handle(executor.execute(command));
     }
 
@@ -135,19 +139,25 @@ public class App {
         running = false;
     }
 
-    public void init(com.itmo.nxzage.server.App server) {
+    public void init() {
         in = new InputManager();
         in.pushSource(new ConsoleInput());
         out = new ConsoleOutput();
         printer = new ExecutionResponsePrinter(out);
         parser = new CommandParser(in, out, getCR());
-        executor = new CommandExecutor(server);
+        executor = new CommandExecutor(new NetworkManager(ClientConfig.HOSTNAME, ClientConfig.HOSTPORT));
+        // TODO init передача порта и адреса 
     }
 
     public void run() {
         running = true;
         while (running) {
-            processCommand(parser.get());
+            try {
+                processCommand(parser.get());
+            } catch (Exception e) {
+                // TODO убрать говно
+                e.printStackTrace();
+            }
         }
     }
 

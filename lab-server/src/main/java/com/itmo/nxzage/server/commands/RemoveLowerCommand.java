@@ -1,7 +1,7 @@
 package com.itmo.nxzage.server.commands;
 
-import com.itmo.nxzage.common.util.ExecutionResponse;
 import com.itmo.nxzage.common.util.data.Person;
+import com.itmo.nxzage.server.ExecutionResponse;
 import com.itmo.nxzage.server.services.storage.PersonStorageServices;
 
 /**
@@ -23,7 +23,7 @@ public final class RemoveLowerCommand extends PersonStorageCommand {
         Integer count = receiver.personService().removeLower(element);
         response.setStatus(OK_STATUS);
         response.setMessage(String.format("Removed %d elements", count));
-        response.applyData("removed_count", count);
+        response.put("removed_count", count);
         return response;
     }
 

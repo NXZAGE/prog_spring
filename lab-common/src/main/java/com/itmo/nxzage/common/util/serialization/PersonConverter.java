@@ -5,8 +5,8 @@ import java.util.Collection;
 import com.itmo.nxzage.common.util.data.Person;
 import com.itmo.nxzage.common.util.exceptions.CSVParseException;
 
+// TODO move to server
 public class PersonConverter implements CSVConverter<Person> {
-
     @Override
     public Collection<Person> deserialize(String data){
         Collection<Person> result = new ArrayList<Person>();
@@ -15,7 +15,7 @@ public class PersonConverter implements CSVConverter<Person> {
             try {
                 result.add(prototype.deserializeCSV(line));
             } catch (CSVParseException exc) {
-                // TODO LOGGING
+                // TODO log
                 continue;
             }
         }

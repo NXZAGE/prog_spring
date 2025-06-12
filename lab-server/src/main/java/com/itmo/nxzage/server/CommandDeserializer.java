@@ -21,6 +21,7 @@ import com.itmo.nxzage.server.exceptions.CommandDeserializeException;
 /**
  * Преобразует объект в формате map в команду
  */
+@Deprecated
 public class CommandDeserializer {
     private static String parseName(Map<String, Object> command)
             throws CommandDeserializeException {

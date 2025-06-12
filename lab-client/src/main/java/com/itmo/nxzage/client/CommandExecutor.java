@@ -1,17 +1,17 @@
 package com.itmo.nxzage.client;
 
 import com.itmo.nxzage.client.commands.Command;
-import com.itmo.nxzage.common.util.ExecutionResponse;
-import com.itmo.nxzage.server.App;
+import com.itmo.nxzage.client.net.NetworkManager;
+import com.itmo.nxzage.common.util.data.DataContainer;
 
 /**
  * Класс, который отправляет команды на сервер
  */
 public class CommandExecutor {
-    private App server;
+    private NetworkManager networkManager;
 
-    public CommandExecutor(App server) {
-        this.server = server;
+    public CommandExecutor(NetworkManager networkManager) {
+        this.networkManager = networkManager;
     }
 
     /**
@@ -20,7 +20,7 @@ public class CommandExecutor {
      * @param command исполняемая команда
      * @return ответ сервера
      */
-    public ExecutionResponse execute(Command command) {
-        return server.processRequest(command.toMap());
+    public DataContainer execute(Command command) {
+        return networkManager.interact(command);
     }
 }

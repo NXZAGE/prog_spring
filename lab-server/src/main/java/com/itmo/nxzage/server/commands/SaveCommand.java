@@ -1,6 +1,6 @@
 package com.itmo.nxzage.server.commands;
 
-import com.itmo.nxzage.common.util.ExecutionResponse;
+import com.itmo.nxzage.server.ExecutionResponse;
 import com.itmo.nxzage.server.services.storage.PersonStorageServices;
 
 /**

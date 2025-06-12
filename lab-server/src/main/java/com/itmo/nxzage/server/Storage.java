@@ -5,17 +5,20 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.TreeSet;
+import java.util.logging.Logger;
 import com.itmo.nxzage.common.util.data.DataElement;
 import com.itmo.nxzage.common.util.exceptions.CSVParseException;
 import com.itmo.nxzage.common.util.serialization.CSVConverter;
 import com.itmo.nxzage.server.exceptions.DumpException;
 import com.itmo.nxzage.server.exceptions.ReadException;
+import com.itmo.nxzage.server.logging.ServerLogger;
 
-
+// TODO переписать на stream API
 public final class Storage<T extends DataElement<T>> {
     private CSVConverter<T> converter;
     private DumpManager dumpManager;
     private TreeSet<T> collection;
+    private final Logger logger = ServerLogger.getLogger("Storage");
 
     public Storage(String filename, CSVConverter<T> converter) {
         this.dumpManager = new DumpManager(filename);
@@ -63,8 +66,10 @@ public final class Storage<T extends DataElement<T>> {
             dumpManager.write(serializedCollection);
         } catch (DumpException exc) {
             // TODO проглатывается exc
+            logger.warning("Failed to dump collection");
             return false;
         }
+        logger.info("Collection successfully dumped");
         return true;
     }
 
@@ -79,6 +84,7 @@ public final class Storage<T extends DataElement<T>> {
         element.validate();
         element.markID();
         collection.add(element);
+        logger.info("Element with id=" + element.getID().toString() + " added");
     }
 
     /**
@@ -135,7 +141,11 @@ public final class Storage<T extends DataElement<T>> {
             return false;
         }
 
-        return collection.remove(element);
+        boolean removed = collection.remove(element);
+        if (removed) {
+            logger.info("Element with id=" + id.toString() + " removed");
+        }
+        return removed;
     }
 
     /**
@@ -143,6 +153,7 @@ public final class Storage<T extends DataElement<T>> {
      */
     public void clear() {
         this.collection.clear();
+        logger.info("Collection cleared");
     }
 
     /**
@@ -162,6 +173,7 @@ public final class Storage<T extends DataElement<T>> {
         }
 
         element.update(newElement);
+        logger.info("Element with id=" + id.toString() + " updated");
         return true;
     }
 

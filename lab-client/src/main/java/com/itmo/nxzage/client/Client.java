@@ -11,9 +11,7 @@ public final class Client {
         // TODO IMPORTANT make commandlinearg
         String serverFilename = args.length > 0 ? args[0] : "localdir/store_file.csv";
         System.out.println(System.getProperty("user.dir"));
-        var server = new com.itmo.nxzage.server.App();
-        server.init(serverFilename);
-        app.init(server);
+        app.init();
         app.run();
     }
 }

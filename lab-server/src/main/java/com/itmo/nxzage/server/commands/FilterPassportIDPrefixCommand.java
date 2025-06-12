@@ -1,8 +1,8 @@
 package com.itmo.nxzage.server.commands;
 
 import java.util.Collection;
-import com.itmo.nxzage.common.util.ExecutionResponse;
 import com.itmo.nxzage.common.util.data.Person;
+import com.itmo.nxzage.server.ExecutionResponse;
 import com.itmo.nxzage.server.services.storage.PersonStorageServices;
 
 /**
@@ -26,7 +26,10 @@ public final class FilterPassportIDPrefixCommand extends PersonStorageCommand {
         } else {
             response.setStatus(OK_STATUS);
             response.setMessage("Successfully loaded");
-            response.applyData("person_collection", collection);
+            response.put("person_collection", collection);
+            response.setHeavy();
+            response.setHeavyKey("person_collection");
+            response.setHeavyType(Person.class);
         }
         return response;
     }

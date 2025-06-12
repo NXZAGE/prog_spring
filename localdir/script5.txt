@@ -1,0 +1,68 @@
+help
+info
+show
+add
+"Test User 1"
+100 200
+3000
+4000
+passport0001
+USA
+12345 67890 12 LOCATION_XYZ
+
+add
+"Test User 2"
+500 600
+7000
+8000
+passport0002
+CANADA
+54321 09876 21 LOCATION_ABC
+
+update 1
+"Updated User 1"
+101 201
+3001
+4001
+passport0001-updated
+MEXICO
+12345 67890 12 LOCATION_UPDATED
+
+remove_by_id 9999
+remove_by_id 2
+
+add_if_max
+"Max User"
+99999 99999
+9999
+9999
+passportMAX
+USA
+99999 9999 99 LOCATION_MAX
+
+add_if_min
+"Min User"
+1 1
+1
+1
+passportMIN
+JAPAN
+11111 11111 11 LOCATION_MIN
+
+remove_lower
+"Medium User"
+500 500
+5000
+5000
+passportMED
+SPAIN
+55555 55555 55 LOCATION_MED
+
+filter_starts_with_passport_i_d passport000
+filter_starts_with_passport_i_d passportXYZ
+
+print_field_ascending_nationality
+print_field_descending_nationality
+
+show
+info
