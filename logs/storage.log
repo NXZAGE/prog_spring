@@ -796,3 +796,9 @@
 [INFO] Storage - Element with id=632 added
 [INFO] Storage - Element with id=633 added
 [INFO] Storage - Collection successfully dumped
+[INFO] Storage - Collection deserialized from files. Objects count: 19
+[INFO] Storage - Serialized collection ready to dump. Size: 3137
+[INFO] Storage - Collection successfully dumped
+[INFO] Storage - Collection deserialized from files. Objects count: 19
+[INFO] Storage - Serialized collection ready to dump. Size: 3137
+[INFO] Storage - Collection successfully dumped

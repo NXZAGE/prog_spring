@@ -5,8 +5,10 @@ import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.logging.Logger;
 import com.itmo.nxzage.server.exceptions.DumpException;
 import com.itmo.nxzage.server.exceptions.ReadException;
+import com.itmo.nxzage.server.logging.ServerLogger;
 
 // TODO возможно очень хуево писать это через String и нужны буферы
 // * лучше переписать это уже на nio
@@ -16,6 +18,7 @@ import com.itmo.nxzage.server.exceptions.ReadException;
  */
 public final class DumpManager {
     private File file;
+    private final Logger logger = ServerLogger.getLogger("DumpManager");
 
     public DumpManager(String filePath) {
         this.file = new File(filePath);

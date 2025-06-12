@@ -16,6 +16,7 @@ public class PersonConverter implements CSVConverter<Person> {
                 result.add(prototype.deserializeCSV(line));
             } catch (CSVParseException exc) {
                 // TODO log
+                System.err.println("CSVParse string failed: " + exc.getMessage());
                 continue;
             }
         }

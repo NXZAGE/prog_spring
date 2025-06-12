@@ -43,8 +43,10 @@ public final class Storage<T extends DataElement<T>> {
         try {
             String data = dumpManager.read();
             collection = new TreeSet<T>(converter.deserialize(data));
+            logger.info("Collection deserialized from files. Objects count: " + String.valueOf(collection.size()));
             return true;
         } catch (ReadException exc) {
+            logger.warning("Failed to load collection: " + exc.getMessage());
             return false;
         } catch (CSVParseException exc) {
             collection = new TreeSet<T>();
@@ -63,6 +65,7 @@ public final class Storage<T extends DataElement<T>> {
     private boolean dump(DumpManager dumpManager) {
         try {
             String serializedCollection = converter.serialize(collection);
+            logger.info("Serialized collection ready to dump. Size: " + serializedCollection.length());
             dumpManager.write(serializedCollection);
         } catch (DumpException exc) {
             // TODO проглатывается exc
