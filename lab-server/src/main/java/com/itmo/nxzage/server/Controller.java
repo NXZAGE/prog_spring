@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.logging.Logger;
 import com.itmo.nxzage.common.util.net.PacketType;
 import com.itmo.nxzage.server.commands.PersonStorageCommand;
+import com.itmo.nxzage.server.commands.SaveCommand;
 import com.itmo.nxzage.server.exceptions.CommandDeserializeException;
 import com.itmo.nxzage.server.exceptions.CommandRecognitionException;
 import com.itmo.nxzage.server.logging.ServerLogger;
@@ -60,6 +61,7 @@ public class Controller {
         compliteInteraction(interaction, response);
         logger.info("Packed responses added to Interaction Context");
         cache.memorize(interaction);
+        executor.execute(new SaveCommand());
     }
 
     private void compliteInteraction(InteractionContext interaction, ExecutionResponse response) {
