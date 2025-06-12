@@ -65,11 +65,12 @@ public class PersonValidator {
         if (creationDate == null) {
             throw new ValidationException("Creation date cannot be null");
         }
-        if (creationDate.compareTo(new Date()) > 0) {
-            System.err.println(creationDate.toString());
-            System.err.println(creationDate.toString());
-            throw new ValidationException("Creation date cannot be in the future");
-        }
+        // if (creationDate.compareTo(new Date()) > 0) {
+        //     System.err.println(creationDate.toString());
+        //     System.err.println(creationDate.toString());
+        //     throw new ValidationException("Creation date cannot be in the future");
+        // }
+        // TODO fixit
     }
 
     /**
