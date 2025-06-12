@@ -2,7 +2,10 @@
 /lab-client/target/
 /lab-common/target/
 /lab-server/target/
+/logs
 # /localdir/
 *.iml
 .idea
 *.jar
+*.log
+*.log.lck

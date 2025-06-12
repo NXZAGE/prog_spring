@@ -64,6 +64,6 @@ public class CacheService {
     }
 
     private boolean isCachable(InteractionContext interaction) {
-        return (interaction.getResponses().size() == 1 && interaction.getResponses().getFirst().getType().equals(PacketType.RESPONSE));
+        return (interaction.getResponses().size() == 1 && interaction.getResponses().get(0).getType().equals(PacketType.RESPONSE));
     }
 }
