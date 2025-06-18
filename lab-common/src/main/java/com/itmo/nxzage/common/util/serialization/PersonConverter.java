@@ -11,7 +11,7 @@ public class PersonConverter implements CSVConverter<Person> {
     public Collection<Person> deserialize(String data){
         Collection<Person> result = new ArrayList<Person>();
         Person prototype = new Person();
-        for (String line : data.split(CSVConvertable.STRING_DELIMETER)) {
+        for (String line : data.split("\\R")) {
             try {
                 result.add(prototype.deserializeCSV(line));
             } catch (CSVParseException exc) {
