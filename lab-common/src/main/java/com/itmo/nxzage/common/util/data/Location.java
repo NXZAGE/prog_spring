@@ -1,6 +1,7 @@
 package com.itmo.nxzage.common.util.data;
 
 import java.io.Serializable;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import com.itmo.nxzage.common.util.exceptions.CSVParseException;
@@ -31,7 +32,7 @@ public final class Location implements Validatable, CSVConvertable<Location>, Se
         // NAME_CONTAINS_CSV_STRING_DELIMETER_MESSAGE = "name can\'t contain CSV string delimeter";
         String floatPattern = "\\d+(?:\\.\\d+)?";
         String intPattern = "\\d+";
-        CSV_DESERIALIZATION_PATTERN = String.format("^Location\\((%s),(%s),(%s)\\)#(.+)$",
+        CSV_DESERIALIZATION_PATTERN = String.format(Locale.US, "^Location\\((%s),(%s),(%s)\\)#(.+)$",
                 floatPattern, intPattern, intPattern);
     }
 
@@ -123,7 +124,7 @@ public final class Location implements Validatable, CSVConvertable<Location>, Se
     @Override
     public String serializeCSV() {
         String pattern = "Location(%f,%d,%d)#%s";
-        return String.format(pattern, x, y, z, name);
+        return String.format(Locale.US, pattern, x, y, z, name);
     }
 
     @Override

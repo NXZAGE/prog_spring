@@ -1,6 +1,7 @@
 package com.itmo.nxzage.common.util.data;
 
 import java.io.Serializable;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import com.itmo.nxzage.common.util.exceptions.CSVParseException;
@@ -84,7 +85,7 @@ public final class Coordinates implements Validatable, CSVConvertable<Coordinate
     @Override
     public String serializeCSV() {
         String pattern = "Coordinates(%f,%f)";
-        return String.format(pattern, x, y);
+        return String.format(Locale.US, pattern, x, y);
     }
 
     @Override

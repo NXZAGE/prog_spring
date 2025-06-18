@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import com.itmo.nxzage.common.util.exceptions.CSVParseException;
@@ -209,7 +210,7 @@ public class Person extends DataElement<Person> {
     @Override
     public String serializeCSV() {
         // TODO вынести логику в отдельный класс
-        return String.format(CSV_SERIALIZATION_PATTERN, id,
+        return String.format(Locale.US, CSV_SERIALIZATION_PATTERN, id,
                 CREATION_DATE_FORMAT.format(creationDate), name, coordinates.serializeCSV(), height,
                 weight, passportID, nationality.serializeCSV(), location.serializeCSV());
     }

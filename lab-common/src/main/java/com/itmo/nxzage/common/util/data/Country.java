@@ -1,5 +1,6 @@
 package com.itmo.nxzage.common.util.data;
 
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import com.itmo.nxzage.common.util.exceptions.CSVParseException;
@@ -51,7 +52,7 @@ public enum Country implements CSVConvertable<Country> {
     @Override
     public String serializeCSV() {
         String pattern = "Country#%d";
-        return String.format(pattern, this.id);
+        return String.format(Locale.US, pattern, this.id);
     }
 
     @Override
