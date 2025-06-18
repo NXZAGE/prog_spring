@@ -802,3 +802,71 @@
 [INFO] Storage - Collection deserialized from files. Objects count: 19
 [INFO] Storage - Serialized collection ready to dump. Size: 3137
 [INFO] Storage - Collection successfully dumped
+[INFO] Storage - Collection deserialized from files. Objects count: 19
+[INFO] Storage - Collection deserialized from files. Objects count: 19
+[INFO] Storage - Serialized collection ready to dump. Size: 3137
+[INFO] Storage - Collection successfully dumped
+[INFO] Storage - Collection deserialized from files. Objects count: 19
+[INFO] Storage - Serialized collection ready to dump. Size: 3137
+[INFO] Storage - Collection successfully dumped
+[INFO] Storage - Collection cleared
+[INFO] Storage - Serialized collection ready to dump. Size: 0
+[INFO] Storage - Collection successfully dumped
+[INFO] Storage - Serialized collection ready to dump. Size: 0
+[INFO] Storage - Collection successfully dumped
+[INFO] Storage - Collection deserialized from files. Objects count: 0
+[INFO] Storage - Serialized collection ready to dump. Size: 0
+[INFO] Storage - Collection successfully dumped
+[INFO] Storage - Serialized collection ready to dump. Size: 0
+[INFO] Storage - Collection successfully dumped
+[INFO] Storage - Serialized collection ready to dump. Size: 0
+[INFO] Storage - Collection successfully dumped
+[INFO] Storage - Element with id=1 added
+[INFO] Storage - Serialized collection ready to dump. Size: 155
+[INFO] Storage - Collection successfully dumped
+[INFO] Storage - Element with id=2 added
+[INFO] Storage - Serialized collection ready to dump. Size: 322
+[INFO] Storage - Collection successfully dumped
+[INFO] Storage - Element with id=3 added
+[INFO] Storage - Serialized collection ready to dump. Size: 492
+[INFO] Storage - Collection successfully dumped
+[INFO] Storage - Serialized collection ready to dump. Size: 492
+[INFO] Storage - Collection successfully dumped
+[INFO] Storage - Collection deserialized from files. Objects count: 3
+[INFO] Storage - Serialized collection ready to dump. Size: 492
+[INFO] Storage - Collection successfully dumped
+[INFO] Storage - Serialized collection ready to dump. Size: 492
+[INFO] Storage - Collection successfully dumped
+[INFO] Storage - Element with id=4 added
+[INFO] Storage - Serialized collection ready to dump. Size: 647
+[INFO] Storage - Collection successfully dumped
+[INFO] Storage - Element with id=5 added
+[INFO] Storage - Serialized collection ready to dump. Size: 814
+[INFO] Storage - Collection successfully dumped
+[INFO] Storage - Element with id=6 added
+[INFO] Storage - Serialized collection ready to dump. Size: 984
+[INFO] Storage - Collection successfully dumped
+[INFO] Storage - Collection deserialized from files. Objects count: 6
+[INFO] Storage - Collection deserialized from files. Objects count: 6
+[INFO] Storage - Collection deserialized from files. Objects count: 6
+[INFO] Storage - Serialized collection ready to dump. Size: 984
+[INFO] Storage - Collection successfully dumped
+[INFO] Storage - Serialized collection ready to dump. Size: 984
+[INFO] Storage - Collection successfully dumped
+[INFO] Storage - Serialized collection ready to dump. Size: 984
+[INFO] Storage - Collection successfully dumped
+[INFO] Storage - Serialized collection ready to dump. Size: 984
+[INFO] Storage - Collection successfully dumped
+[INFO] Storage - Element with id=7 added
+[INFO] Storage - Serialized collection ready to dump. Size: 1130
+[INFO] Storage - Collection successfully dumped
+[INFO] Storage - Serialized collection ready to dump. Size: 1130
+[INFO] Storage - Collection successfully dumped
+[INFO] Storage - Serialized collection ready to dump. Size: 1130
+[INFO] Storage - Collection successfully dumped
+[INFO] Storage - Collection deserialized from files. Objects count: 7
+[INFO] Storage - Collection deserialized from files. Objects count: 7
+[INFO] Storage - Serialized collection ready to dump. Size: 1130
+[INFO] Storage - Collection successfully dumped
+[INFO] Storage - Serialized collection ready to dump. Size: 1130
+[INFO] Storage - Collection successfully dumped

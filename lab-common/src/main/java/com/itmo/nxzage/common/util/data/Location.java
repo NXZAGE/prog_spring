@@ -8,6 +8,7 @@ import com.itmo.nxzage.common.util.exceptions.ValidationException;
 import com.itmo.nxzage.common.util.serialization.CSVConvertable;
 
 public final class Location implements Validatable, CSVConvertable<Location>, Serializable {
+    private static final long serialVersionUID = 1L;
     private static final String DEFAULT_NAME = "noname";
     private static final Integer NAME_MAX_LENGTH = 210;
     // private static final String X_NULL_MESSAGE;

@@ -16,6 +16,8 @@ import com.itmo.nxzage.client.net.NetworkManager;
 import com.itmo.nxzage.client.parsing.fields.FilenameField;
 import com.itmo.nxzage.client.parsing.fields.IDField;
 import com.itmo.nxzage.client.parsing.fields.PassportPrefixField;
+import com.itmo.nxzage.client.parsing.fields.ServerAddressField;
+import com.itmo.nxzage.client.parsing.fields.ServerPortField;
 import com.itmo.nxzage.client.parsing.forms.CommandForm;
 import com.itmo.nxzage.client.parsing.forms.PersonArgForm;
 import com.itmo.nxzage.client.parsing.forms.PersonForm;
@@ -42,6 +44,7 @@ public class App {
      * @return заполненный command register
      */
     private CommandRegister getCR() {
+        // TODO вынести в отдельный класс
         var CR = new CommandRegister();
         CR.recordCommand("help", Type.CLIENT, null, null);
         CR.recordCommand("execute_script", Type.CLIENT, new FilenameField(), null);
@@ -60,6 +63,9 @@ public class App {
         CR.recordCommand("remove_lower", Type.SERVER, null, new PersonArgForm());
         CR.recordCommand("clear", Type.SERVER, null, null);
         CR.recordCommand("save", Type.SERVER, null, null);
+        CR.recordCommand("set_hostname", Type.CLIENT, new ServerAddressField(), null);
+        CR.recordCommand("set_hostport", Type.CLIENT, new ServerPortField(), null);
+        CR.recordCommand("show_server_socket", Type.CLIENT, null, null);
         return CR;
     }
 
@@ -94,6 +100,15 @@ public class App {
                 break;
             case "execute_script":
                 executeScript((String) command.getArgs().get("filename"));
+                break;
+            case "set_hostname":
+                setHostname((String) command.getArgs().get("address"));
+                break;
+            case "set_hostport":
+                setHostport((Integer) command.getArgs().get("hostport"));
+                break;
+            case "show_server_socket": 
+                showServerSocket();
                 break;
             case "exit": 
                 exit();
@@ -134,6 +149,21 @@ public class App {
         }
     }
 
+    private void setHostname(String hostname) {
+        ClientConfig.setHostname(hostname);
+        initCommandExecutor();
+    }
+
+    private void setHostport(int port) {
+        ClientConfig.setHostport(port);
+        initCommandExecutor();
+    }
+
+    private void showServerSocket() {
+        out.printMessage("Hostname: " + ClientConfig.getHostname() + "\n");
+        out.printMessage("Hostport: " + String.valueOf(ClientConfig.getHostport()) + "\n");
+    }
+
     private void exit() {
         out.printMessage("Выполняется выход...\n");
         running = false;
@@ -144,9 +174,12 @@ public class App {
         in.pushSource(new ConsoleInput());
         out = new ConsoleOutput();
         printer = new ExecutionResponsePrinter(out);
-        parser = new CommandParser(in, out, getCR());
-        executor = new CommandExecutor(new NetworkManager(ClientConfig.HOSTNAME, ClientConfig.HOSTPORT));
-        // TODO init передача порта и адреса 
+        parser = new CommandParser(in, out, getCR());        // TODO init передача порта и адреса 
+        initCommandExecutor();
+    }
+
+    public void initCommandExecutor() {
+        executor = new CommandExecutor(new NetworkManager(ClientConfig.getHostname(), ClientConfig.getHostport()));
     }
 
     public void run() {

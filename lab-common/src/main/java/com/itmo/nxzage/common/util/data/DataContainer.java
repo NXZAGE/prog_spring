@@ -10,7 +10,7 @@ import com.itmo.nxzage.common.util.exceptions.ValidationException;
  * доступ, гибкую валидацию и сериализацию.
  */
 public class DataContainer implements Serializable, Validatable {
-
+    private static final long serialVersionUID = 1L;
     private final Map<String, Object> data;
     private transient Consumer<DataContainer> validator;
 

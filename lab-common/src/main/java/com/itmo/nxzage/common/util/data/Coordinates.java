@@ -8,6 +8,7 @@ import com.itmo.nxzage.common.util.exceptions.ValidationException;
 import com.itmo.nxzage.common.util.serialization.CSVConvertable;
 
 public final class Coordinates implements Validatable, CSVConvertable<Coordinates>, Serializable {
+    private static final long serialVersionUID = 1L;
     private static final Double MIN_X = -727d;
     // private static final String X_NULL_MESSAGE;
     // private static final String X_OUT_OF_RANGE_MESSAGE;

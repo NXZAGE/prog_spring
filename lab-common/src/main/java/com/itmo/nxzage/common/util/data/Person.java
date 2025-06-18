@@ -16,6 +16,7 @@ import com.itmo.nxzage.common.util.serialization.CSVConvertable;
  */
 public class Person extends DataElement<Person> {
     // Статические поля для сериализации/десериализации CSV
+    private static final long serialVersionUID = 1L;
     private static Integer nextID = 1;
     private static Pattern CSV_DESERIALIZATION_PATTERN;
     private static String CSV_SERIALIZATION_PATTERN;
