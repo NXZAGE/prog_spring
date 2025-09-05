@@ -15,7 +15,7 @@ import com.itmo.nxzage.server.services.storage.PersonStorageService;
  * Основное приложение сервера
  */
 public final class App {
-    private static final int PORT = 3779; 
+    private static final int PORT = 3888; 
     private static final int BUFFER_SIZE = 8192;
     private Storage<Person> storage;
     private PersonStorageService services;
