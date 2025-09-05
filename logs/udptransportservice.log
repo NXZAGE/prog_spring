@@ -39246,3 +39246,25 @@
 [SEVERE] UDPTransportService - Response serialization failed: com.itmo.nxzage.common.util.net.response.DTO.PersonCollectionResponseDTO
 [INFO] UDPTransportService - Received datagram
 [SEVERE] UDPTransportService - Response serialization failed: com.itmo.nxzage.common.util.net.response.DTO.PersonCollectionResponseDTO
+[INFO] UDPTransportService - Received datagram
+[INFO] UDPTransportService - Received datagram
+[INFO] UDPTransportService - Packet successfully sent
+[INFO] UDPTransportService - Packet successfully sent
+[INFO] UDPTransportService - Received datagram
+[INFO] UDPTransportService - Packet successfully sent
+[INFO] UDPTransportService - Packet successfully sent
+[INFO] UDPTransportService - Packet successfully sent
+[INFO] UDPTransportService - Packet successfully sent
+[INFO] UDPTransportService - Packet successfully sent
+[INFO] UDPTransportService - Received datagram
+[INFO] UDPTransportService - Packet successfully sent
+[INFO] UDPTransportService - Packet successfully sent
+[INFO] UDPTransportService - Received datagram
+[INFO] UDPTransportService - Packet successfully sent
+[INFO] UDPTransportService - Packet successfully sent
+[INFO] UDPTransportService - Packet successfully sent
+[INFO] UDPTransportService - Packet successfully sent
+[INFO] UDPTransportService - Packet successfully sent
+[INFO] UDPTransportService - Received datagram
+[INFO] UDPTransportService - Packet successfully sent
+[INFO] UDPTransportService - Packet successfully sent
