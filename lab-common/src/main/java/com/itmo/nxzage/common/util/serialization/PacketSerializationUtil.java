@@ -12,8 +12,9 @@ import com.itmo.nxzage.common.util.exceptions.PacketSerializationException;
 // TODO move to client (если там все норм и channels это тоже датаграммы) 
 public class PacketSerializationUtil {
     static {
-        var filter = ObjectInputFilter.Config.createFilter("com.itmo.nxzage.common.util.net.*");
-        ObjectInputFilter.Config.setSerialFilter(filter);
+        // TODO erase? important
+        // var filter = ObjectInputFilter.Config.createFilter("com.itmo.nxzage.common.util.net.*");
+        // ObjectInputFilter.Config.setSerialFilter(filter);
     }
 
     private PacketSerializationUtil() {
@@ -21,7 +22,7 @@ public class PacketSerializationUtil {
     }
 
     public static PacketWrapper deseralize(DatagramPacket packet) {
-                byte[] data = packet.getData();
+        byte[] data = packet.getData();
         return deseralize(data, data.length);
     }
 

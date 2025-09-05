@@ -1,7 +1,8 @@
 package com.itmo.nxzage.server.commands;
 
-import com.itmo.nxzage.server.ExecutionResponse;
-import com.itmo.nxzage.server.services.storage.PersonStorageServices;
+import com.itmo.nxzage.server.responses.ExecutionResponse;
+import com.itmo.nxzage.server.responses.StringResponse;
+import com.itmo.nxzage.server.services.storage.PersonStorageService;
 
 /**
  * Возвращает общую информацию о хранилище
@@ -9,12 +10,12 @@ import com.itmo.nxzage.server.services.storage.PersonStorageServices;
 public final class InfoCommand extends PersonStorageCommand {
 
     @Override
-    public ExecutionResponse execute(PersonStorageServices receiver) {
-        var response = new ExecutionResponse();
-        String info = receiver.baseService().info();
+    public ExecutionResponse execute(PersonStorageService receiver) {
+        var response = new StringResponse();
+        String info = receiver.info();
         response.setStatus(OK_STATUS);
         response.setMessage("Storage info successfully loaded");
-        response.put("info", info);
+        response.setData(info);
         return response;
     }
 

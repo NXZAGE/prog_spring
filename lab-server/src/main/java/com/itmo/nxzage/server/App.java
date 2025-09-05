@@ -7,17 +7,18 @@ import com.itmo.nxzage.common.util.data.Person;
 import com.itmo.nxzage.common.util.serialization.PersonConverter;
 import com.itmo.nxzage.server.logging.ServerLogger;
 import com.itmo.nxzage.server.net.InteractionContext;
+import com.itmo.nxzage.server.responses.ExecutionResponse;
 import com.itmo.nxzage.server.services.net.UDPTransportService;
-import com.itmo.nxzage.server.services.storage.PersonStorageServices;
+import com.itmo.nxzage.server.services.storage.PersonStorageService;
 
 /**
  * Основное приложение сервера
  */
 public final class App {
-    private static final int PORT = 3777; 
+    private static final int PORT = 3779; 
     private static final int BUFFER_SIZE = 8192;
     private Storage<Person> storage;
-    private PersonStorageServices services;
+    private PersonStorageService services;
     private UDPTransportService transportService;
     private Controller controller;
     private boolean running = false;
@@ -41,7 +42,7 @@ public final class App {
         // TODO сделать что то типо универсальной ошибки пизданувшегося сервера
         storage = new Storage<Person>(filename, new PersonConverter());
         logger.info("Storage initialized");
-        services = new PersonStorageServices(storage);
+        services = new PersonStorageService(storage);
         logger.info("Storage Services initialized");
         controller = new Controller(new CommandHandler(services));
         logger.info("Controller initialized");
@@ -49,7 +50,7 @@ public final class App {
             logger.severe("Storage connection to file failed");
             throw new IllegalStateException("Unable to create storage: wrong filename");
         }
-        Person.updateNextID(storage.getAll(running));
+        Person.updateNextID(storage.getAll(running).toList());
         logger.info("Peron NextID updated");
         try {
             transportService = new UDPTransportService(PORT, BUFFER_SIZE);

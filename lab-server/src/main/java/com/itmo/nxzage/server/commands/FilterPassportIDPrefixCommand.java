@@ -2,8 +2,9 @@ package com.itmo.nxzage.server.commands;
 
 import java.util.Collection;
 import com.itmo.nxzage.common.util.data.Person;
-import com.itmo.nxzage.server.ExecutionResponse;
-import com.itmo.nxzage.server.services.storage.PersonStorageServices;
+import com.itmo.nxzage.server.responses.ExecutionResponse;
+import com.itmo.nxzage.server.responses.PersonCollectionResponse;
+import com.itmo.nxzage.server.services.storage.PersonStorageService;
 
 /**
  * Возвращает элементы, passportID которых начинается с заданного префикса
@@ -16,9 +17,9 @@ public final class FilterPassportIDPrefixCommand extends PersonStorageCommand {
     }
 
     @Override
-    public ExecutionResponse execute(PersonStorageServices receiver) {
-        var response = new ExecutionResponse();
-        Collection<Person> collection = receiver.personService().filterPassportIDPrefix(prefix);
+    public ExecutionResponse execute(PersonStorageService receiver) {
+        var response = new PersonCollectionResponse();
+        Collection<Person> collection = receiver.filterPassportIDPrefix(prefix);
         if (collection.isEmpty()) {
             response.setStatus(ERROR_STATUS);
             response.setMessage(
@@ -26,10 +27,7 @@ public final class FilterPassportIDPrefixCommand extends PersonStorageCommand {
         } else {
             response.setStatus(OK_STATUS);
             response.setMessage("Successfully loaded");
-            response.put("person_collection", collection);
-            response.setHeavy();
-            response.setHeavyKey("person_collection");
-            response.setHeavyType(Person.class);
+            response.setData(collection.stream().toList());
         }
         return response;
     }

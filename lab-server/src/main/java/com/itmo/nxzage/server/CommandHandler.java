@@ -1,15 +1,16 @@
 package com.itmo.nxzage.server;
 
 import com.itmo.nxzage.server.commands.PersonStorageCommand;
-import com.itmo.nxzage.server.services.storage.PersonStorageServices;
+import com.itmo.nxzage.server.responses.ExecutionResponse;
+import com.itmo.nxzage.server.services.storage.PersonStorageService;
 
 /**
  * Исполнитель команд
  */
 public class CommandHandler {
-    private PersonStorageServices services;
+    private PersonStorageService services;
 
-    public CommandHandler(PersonStorageServices services) {
+    public CommandHandler(PersonStorageService services) {
         this.services = services;
     }
 

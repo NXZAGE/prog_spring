@@ -9,6 +9,7 @@ import com.itmo.nxzage.server.exceptions.CommandDeserializeException;
 import com.itmo.nxzage.server.exceptions.CommandRecognitionException;
 import com.itmo.nxzage.server.logging.ServerLogger;
 import com.itmo.nxzage.server.net.InteractionContext;
+import com.itmo.nxzage.server.responses.ExecutionResponse;
 import com.itmo.nxzage.server.services.net.CacheService;
 
 /**
@@ -65,7 +66,7 @@ public class Controller {
     }
 
     private void compliteInteraction(InteractionContext interaction, ExecutionResponse response) {
-        ExecutionResponsePacker.pack(response).forEach(packet -> interaction.addResponse(packet));
+        interaction.setResponse(response);
     }
 
     /**

@@ -1,8 +1,8 @@
 package com.itmo.nxzage.server.commands;
 
 import com.itmo.nxzage.common.util.data.Person;
-import com.itmo.nxzage.server.ExecutionResponse;
-import com.itmo.nxzage.server.services.storage.PersonStorageServices;
+import com.itmo.nxzage.server.responses.ExecutionResponse;
+import com.itmo.nxzage.server.services.storage.PersonStorageService;
 
 /**
  * Обновляет элемент с заданным id в соответсвии с переданным элементом
@@ -17,9 +17,9 @@ public final class UpdateCommand extends PersonStorageCommand {
     }
 
     @Override
-    public ExecutionResponse execute(PersonStorageServices receiver) {
+    public ExecutionResponse execute(PersonStorageService receiver) {
         var response = new ExecutionResponse();
-        if (receiver.baseService().update(id, element)) {
+        if (receiver.update(id, element)) {
             response.setStatus(OK_STATUS);
             response.setMessage("Successfully updated");
         } else {

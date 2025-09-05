@@ -870,3 +870,19 @@
 [INFO] Storage - Collection successfully dumped
 [INFO] Storage - Serialized collection ready to dump. Size: 1130
 [INFO] Storage - Collection successfully dumped
+[INFO] Storage - Collection deserialized from files. Objects count: 7
+[INFO] Storage - Serialized collection ready to dump. Size: 1130
+[INFO] Storage - Collection successfully dumped
+[INFO] Storage - Element with id=8 added
+[INFO] Storage - Serialized collection ready to dump. Size: 1276
+[INFO] Storage - Collection successfully dumped
+[INFO] Storage - Serialized collection ready to dump. Size: 1276
+[INFO] Storage - Collection successfully dumped
+[INFO] Storage - Serialized collection ready to dump. Size: 1276
+[INFO] Storage - Collection successfully dumped
+[INFO] Storage - Collection deserialized from files. Objects count: 8
+[INFO] Storage - Serialized collection ready to dump. Size: 1276
+[INFO] Storage - Collection successfully dumped
+[INFO] Storage - Collection deserialized from files. Objects count: 8
+[INFO] Storage - Serialized collection ready to dump. Size: 1276
+[INFO] Storage - Collection successfully dumped

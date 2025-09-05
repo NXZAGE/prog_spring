@@ -1,13 +1,13 @@
 package com.itmo.nxzage.server.commands;
 
-import com.itmo.nxzage.server.ExecutionResponse;
-import com.itmo.nxzage.server.services.storage.PersonStorageServices;
+import com.itmo.nxzage.server.responses.ExecutionResponse;
+import com.itmo.nxzage.server.services.storage.PersonStorageService;
 
 // TODO toString
 /**
  * Абстрактный класс команды, которая рабоатет с хранилищем Person
  */
-public abstract class PersonStorageCommand implements Command<ExecutionResponse, PersonStorageServices> {
+public abstract class PersonStorageCommand implements Command<ExecutionResponse, PersonStorageService> {
     // константы для заполнения полдей ExecutionResponce.status
     public static final String OK_STATUS = "success";
     public static final String ERROR_STATUS = "error";

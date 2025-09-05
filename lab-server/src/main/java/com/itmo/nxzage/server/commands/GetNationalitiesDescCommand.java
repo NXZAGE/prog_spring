@@ -2,9 +2,9 @@ package com.itmo.nxzage.server.commands;
 
 import java.util.Collection;
 import com.itmo.nxzage.common.util.data.Country;
-import com.itmo.nxzage.common.util.data.Person;
-import com.itmo.nxzage.server.ExecutionResponse;
-import com.itmo.nxzage.server.services.storage.PersonStorageServices;
+import com.itmo.nxzage.server.responses.CountryCollectionResponse;
+import com.itmo.nxzage.server.responses.ExecutionResponse;
+import com.itmo.nxzage.server.services.storage.PersonStorageService;
 
 /**
  * Возвращает поля nationality в порядке убывания
@@ -12,15 +12,12 @@ import com.itmo.nxzage.server.services.storage.PersonStorageServices;
 public final class GetNationalitiesDescCommand extends PersonStorageCommand {
 
     @Override
-    public ExecutionResponse execute(PersonStorageServices receiver) {
-        var response = new ExecutionResponse();
-        Collection<Country> collection = receiver.personService().getNationalityDescending();
+    public ExecutionResponse execute(PersonStorageService receiver) {
+        var response = new CountryCollectionResponse();
+        Collection<Country> collection = receiver.getNationalityDescending();
         response.setStatus(OK_STATUS);
         response.setMessage("Successfully loaded nationality fields");
-        response.put("nationalities_collection", collection);
-        response.setHeavy();
-        response.setHeavyKey("nationalities_collection");
-        response.setHeavyType(Country.class);
+        response.setData(collection.stream().toList());
         return response;
     }
 

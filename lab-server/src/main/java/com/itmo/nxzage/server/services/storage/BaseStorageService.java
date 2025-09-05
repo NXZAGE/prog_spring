@@ -28,7 +28,7 @@ public class BaseStorageService<T extends DataElement<T>> {
      * @return отсортированная по возрастанию коллекция
      */
     public Collection<T> getCollection() {
-        return storage.getAll(true);
+        return storage.getAll(true).toList();
     }
 
     /**
@@ -36,7 +36,7 @@ public class BaseStorageService<T extends DataElement<T>> {
      * @return отсортированная по убыванию коллекция
      */
     public Collection<T> getReversedCollection() {
-        return storage.getAll(false);
+        return storage.getAll(false).toList();
     }
 
     /**

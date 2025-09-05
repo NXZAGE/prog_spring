@@ -9,11 +9,11 @@ import com.itmo.nxzage.server.Storage;
 /**
  * Сервис, с расширенным интерфейсом для Storage из объектов типа Person
  */
-public class PersonStorageService {
+public class PersonStorageService extends BaseStorageService<Person> {
     Storage<Person> storage;
 
     public PersonStorageService(Storage<Person> storage) {
-        this.storage = storage;
+        super(storage);
     }
 
     /**
@@ -50,7 +50,7 @@ public class PersonStorageService {
      * @return количество удаленных элементов
      */
     public int removeLower(Person reference) {
-        List<Person> toRemove = storage.getAll(false).stream()
+        List<Person> toRemove = storage.getAll(false)
                 .takeWhile((element) -> (element.compareTo(reference) < 0)).toList();
         toRemove.forEach((element) -> storage.remove(element.getID()));
         return toRemove.size();
@@ -61,7 +61,7 @@ public class PersonStorageService {
      * @return коллекция со значениями nationality
      */
     public Collection<Country> getNationalityAscending() {
-        return storage.getAll(false).stream().map((element) -> element.getNationality()).toList();
+        return storage.getAll(false).map((element) -> element.getNationality()).toList();
     }
 
     /**
@@ -69,7 +69,7 @@ public class PersonStorageService {
      * @return коллекция со значениями nationality
      */
     public Collection<Country> getNationalityDescending() {
-        return storage.getAll(true).stream().map((element) -> element.getNationality()).toList();
+        return storage.getAll(true).map((element) -> element.getNationality()).toList();
     }
 
     /**
@@ -78,7 +78,7 @@ public class PersonStorageService {
      * @return коллекцию элементов, passportID которых начинается с prefix
      */
     public Collection<Person> filterPassportIDPrefix(String prefix) {
-        return storage.getAll(false).stream()
+        return storage.getAll(false)
                 .filter((element) -> element.getPassportID().startsWith(prefix)).toList();
     }
 }

@@ -1,8 +1,9 @@
 package com.itmo.nxzage.server.commands;
 
 import com.itmo.nxzage.common.util.data.Person;
-import com.itmo.nxzage.server.ExecutionResponse;
-import com.itmo.nxzage.server.services.storage.PersonStorageServices;
+import com.itmo.nxzage.server.responses.ExecutionResponse;
+import com.itmo.nxzage.server.responses.NumberResponse;
+import com.itmo.nxzage.server.services.storage.PersonStorageService;
 
 /**
  * Удаляет из коллекции элементы ментьше, чем заданный
@@ -18,12 +19,12 @@ public final class RemoveLowerCommand extends PersonStorageCommand {
     }
 
     @Override
-    public ExecutionResponse execute(PersonStorageServices receiver) {
-        var response = new ExecutionResponse();
-        Integer count = receiver.personService().removeLower(element);
+    public ExecutionResponse execute(PersonStorageService receiver) {
+        var response = new NumberResponse();
+        Integer count = receiver.removeLower(element);
         response.setStatus(OK_STATUS);
         response.setMessage(String.format("Removed %d elements", count));
-        response.put("removed_count", count);
+        response.setValue(count);
         return response;
     }
 

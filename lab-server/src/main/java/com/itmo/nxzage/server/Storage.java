@@ -1,11 +1,10 @@
 package com.itmo.nxzage.server;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.TreeSet;
 import java.util.logging.Logger;
+import java.util.stream.Stream;
 import com.itmo.nxzage.common.util.data.DataElement;
 import com.itmo.nxzage.common.util.exceptions.CSVParseException;
 import com.itmo.nxzage.common.util.serialization.CSVConverter;
@@ -117,19 +116,12 @@ public final class Storage<T extends DataElement<T>> {
      * @param reversed true, если нужно вернуть коллекцию в порядке убывания
      * @return отсортированную коллекцию
      */
-    public Collection<T> getAll(boolean reversed) {
-        ArrayList<T> list = new ArrayList<T>();
-        Iterator<T> iter = collection.iterator();
-        while (iter.hasNext()) {
-            T element = iter.next();
-            if (reversed) {
-                list.add(0, element);
-            } else {
-                list.add(element);
-            }
+    public Stream<T> getAll(boolean reversed) {
+        if (reversed) {
+            return collection.reversed().stream();
+        } else {
+            return collection.stream();
         }
-
-        return list;
     }
 
 

@@ -1,7 +1,7 @@
 package com.itmo.nxzage.server.commands;
 
-import com.itmo.nxzage.server.ExecutionResponse;
-import com.itmo.nxzage.server.services.storage.PersonStorageServices;
+import com.itmo.nxzage.server.responses.ExecutionResponse;
+import com.itmo.nxzage.server.services.storage.PersonStorageService;
 
 /**
  * Сохраняет коллекцию в файл
@@ -9,9 +9,9 @@ import com.itmo.nxzage.server.services.storage.PersonStorageServices;
 public final class SaveCommand extends PersonStorageCommand {
 
     @Override
-    public ExecutionResponse execute(PersonStorageServices receiver) {
+    public ExecutionResponse execute(PersonStorageService receiver) {
         var response = new ExecutionResponse();
-        receiver.baseService().dump();
+        receiver.dump();
         response.setStatus(OK_STATUS);
         response.setMessage("Collection saved to file");
 

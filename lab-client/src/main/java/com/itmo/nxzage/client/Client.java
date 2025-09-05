@@ -9,7 +9,7 @@ public final class Client {
     public static void main(String[] args) {
         App app = new App();
         // TODO IMPORTANT make commandlinearg
-        String serverFilename = args.length > 0 ? args[0] : "localdir/store_file.csv";
+        // String serverFilename = args.length > 0 ? args[0] : "localdir/store_file.csv";
         System.out.println(System.getProperty("user.dir"));
         app.init();
         app.run();

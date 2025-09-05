@@ -1,23 +1,21 @@
 package com.itmo.nxzage.server.services.net;
 
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.logging.Logger;
-import com.itmo.nxzage.common.util.net.PacketType;
-import com.itmo.nxzage.common.util.net.PacketWrapper;
 import com.itmo.nxzage.server.logging.ServerLogger;
 import com.itmo.nxzage.server.net.InteractionContext;
+import com.itmo.nxzage.server.responses.ExecutionResponse;
 
 public class CacheService {
     private static final int MAX_CACHE_SIZE = 1000;
     private static final int MIN_CACHE_SIZE = 200;
-    private final Map<UUID, List<PacketWrapper>> cache;
+    private final Map<UUID, ExecutionResponse> cache;
     private final Logger logger = ServerLogger.getLogger("Cache");
     
     {
-        cache = new LinkedHashMap<UUID, List<PacketWrapper>>();
+        cache = new LinkedHashMap<UUID, ExecutionResponse>();
     }
 
     public boolean hit(InteractionContext interaction) {
@@ -30,8 +28,8 @@ public class CacheService {
             logger.info("Interaction wasn\'t hit in cache");
             return false;
         }
-        List<PacketWrapper> responses = cache.get(interactionID);
-        interaction.setResponses(responses);
+        ExecutionResponse response = cache.get(interactionID);
+        interaction.setResponse(response);
         logger.info("Interaction hitted and Interaction Context successfully filled with response packets");
         return true;
     }
@@ -42,7 +40,7 @@ public class CacheService {
             return;
         }
         UUID interactionID = interaction.getID();
-        List<PacketWrapper> responses = interaction.getResponses();
+        ExecutionResponse responses= interaction.getResponses();
         cache.put(interactionID, responses);
         logger.info("Interaction memorized");
         clear();
@@ -64,6 +62,7 @@ public class CacheService {
     }
 
     private boolean isCachable(InteractionContext interaction) {
-        return (interaction.getResponses().size() == 1 && interaction.getResponses().get(0).getType().equals(PacketType.RESPONSE));
+        // TODO cache filter
+        return true;
     }
 }

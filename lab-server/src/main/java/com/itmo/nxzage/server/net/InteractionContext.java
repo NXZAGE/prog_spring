@@ -1,20 +1,15 @@
 package com.itmo.nxzage.server.net;
 
 import java.net.InetSocketAddress;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 import com.itmo.nxzage.common.util.net.PacketWrapper;
+import com.itmo.nxzage.server.responses.ExecutionResponse;
 
 public class InteractionContext {
     private final UUID id;
     private final InetSocketAddress clientAddress;
     private final PacketWrapper request;
-    private final List<PacketWrapper> responses;
-
-    {
-        responses = new ArrayList<PacketWrapper>();
-    }
+    private ExecutionResponse response;
 
     public InteractionContext(PacketWrapper request, InetSocketAddress address) {
         this.id = request.getInteractionID();
@@ -34,21 +29,15 @@ public class InteractionContext {
         return request;
     }
 
-    public List<PacketWrapper> getResponses() {
-        return responses;
+    public ExecutionResponse getResponses() {
+        return response;
     }
 
-    public void addResponse(PacketWrapper response) {
-        // TODO: validation?
-        response.setInteractionID(id);
-        responses.add(response);
+    public void setResponse(ExecutionResponse response) {
+        this.response = response;
     }
 
-    public void setResponses(List<PacketWrapper> responses) {
-        if (responses.stream().anyMatch(response -> !(response.getInteractionID().equals(id)))) {
-            throw new IllegalArgumentException(
-                    "Responses contains packet with wrong interactionID");
-        }
-        responses.forEach(response -> this.responses.add(response));
+    public boolean complited() {
+        return response != null;
     }
 }
