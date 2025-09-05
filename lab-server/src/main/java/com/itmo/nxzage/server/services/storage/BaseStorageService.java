@@ -8,7 +8,7 @@ import com.itmo.nxzage.server.Storage;
  * Универсальный сервис Storage с базовым интерфейсом (CRUD операции)
  */
 public class BaseStorageService<T extends DataElement<T>> {
-    Storage<T> storage;
+    protected Storage<T> storage;
 
     public BaseStorageService(Storage<T> storage) {
         this.storage = storage;

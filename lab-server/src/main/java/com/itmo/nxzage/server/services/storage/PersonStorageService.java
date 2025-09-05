@@ -10,8 +10,6 @@ import com.itmo.nxzage.server.Storage;
  * Сервис, с расширенным интерфейсом для Storage из объектов типа Person
  */
 public class PersonStorageService extends BaseStorageService<Person> {
-    Storage<Person> storage;
-
     public PersonStorageService(Storage<Person> storage) {
         super(storage);
     }

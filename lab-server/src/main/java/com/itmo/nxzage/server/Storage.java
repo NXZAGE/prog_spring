@@ -104,7 +104,7 @@ public final class Storage<T extends DataElement<T>> {
         Iterator<T> iter = collection.iterator();
         while (iter.hasNext()) {
             T elem = iter.next();
-            if (elem.getID() == id) {
+            if (elem.getID().equals(id)) {
                 return elem;
             }
         }

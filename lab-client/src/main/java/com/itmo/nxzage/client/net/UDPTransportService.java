@@ -13,7 +13,7 @@ import com.itmo.nxzage.common.util.serialization.PacketSerializationUtil;
 import com.itmo.nxzage.common.util.serialization.Packetizer;
 
 public class UDPTransportService {
-    private static final int BUFFER_SIZE = 1024;
+    private static final int BUFFER_SIZE = 10000;
     private final DatagramSocket socket;
 
     public UDPTransportService(String hostname, int port) {
