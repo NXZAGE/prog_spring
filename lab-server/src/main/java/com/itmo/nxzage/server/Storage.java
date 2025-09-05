@@ -118,7 +118,7 @@ public final class Storage<T extends DataElement<T>> {
      */
     public Stream<T> getAll(boolean reversed) {
         if (reversed) {
-            return collection.reversed().stream();
+            return collection.descendingSet().stream();
         } else {
             return collection.stream();
         }
