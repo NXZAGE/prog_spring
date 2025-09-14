@@ -21,7 +21,7 @@ public final class RemoveLowerCommand extends PersonStorageCommand {
     @Override
     public ExecutionResponse execute(PersonStorageService receiver) {
         var response = new NumberResponse();
-        Integer count = receiver.removeLower(element);
+        Integer count = receiver.removeLower(element, this.user.getId());
         response.setStatus(OK_STATUS);
         response.setMessage(String.format("Removed %d elements", count));
         response.setValue(count);

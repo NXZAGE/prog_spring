@@ -39,6 +39,13 @@ public class Command {
         args.forEach((key, value) -> this.args.merge(key, value, (oldV, newV) -> oldV));
     }
 
+    public void applyArg(String key, Object value) {
+        if (key == null) {
+            throw new IllegalArgumentException("Key cant be null");
+        }
+        args.put(key, value);
+    }
+
     public boolean isClient() {
         return type.equals(Type.CLIENT);
     }

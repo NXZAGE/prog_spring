@@ -29,7 +29,7 @@ public class CacheService {
             return false;
         }
         ExecutionResponse response = cache.get(interactionID);
-        interaction.setResponse(response);
+        //! interaction.setResponse(response);
         logger.info("Interaction hitted and Interaction Context successfully filled with response packets");
         return true;
     }
@@ -40,8 +40,8 @@ public class CacheService {
             return;
         }
         UUID interactionID = interaction.getID();
-        ExecutionResponse responses= interaction.getResponses();
-        cache.put(interactionID, responses);
+        //! ExecutionResponse responses= interaction.getResponses();
+        //! cache.put(interactionID, responses);
         logger.info("Interaction memorized");
         clear();
     }

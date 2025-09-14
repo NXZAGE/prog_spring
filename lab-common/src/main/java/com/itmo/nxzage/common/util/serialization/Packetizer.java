@@ -1,16 +1,19 @@
 package com.itmo.nxzage.common.util.serialization;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.SortedMap;
 import java.util.UUID;
-import com.itmo.nxzage.common.util.net.response.DTO.ResponseHeader;
+import com.itmo.nxzage.common.util.net.PacketHeader;
 
 public class Packetizer {
 
-    private static final int HEADER_SIZE = 4 + 16; // number + UUID
+    public static final int HEADER_SIZE = 4 + 16; // number + UUID
     private final int maxPacketSize;
 
     public Packetizer(int maxPacketSize) {
@@ -40,7 +43,7 @@ public class Packetizer {
         return packets;
     }
 
-    public byte[] buildHeader(ResponseHeader header, UUID uuid) throws IOException {
+    public byte[] buildHeader(PacketHeader header, UUID uuid) throws IOException {
         byte[] serialized = SerializationUtil.serialize(header);
 
         ByteBuffer bb = ByteBuffer.allocate(HEADER_SIZE + serialized.length);
@@ -63,4 +66,25 @@ public class Packetizer {
         long lsb = bb.getLong();
         return new UUID(msb, lsb);
     }
+
+    public static byte[] getPacketPayload(byte[] packet) {
+        return Arrays.copyOfRange(packet, HEADER_SIZE, packet.length);
+    }
+
+    public static boolean isFrameHeader(byte[] frame) {
+        return getPacketNumber(frame).equals(0);
+    }
+
+    public static byte[] assemblePayload(SortedMap<Integer, byte[]> packets) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        for (byte[] chunk : packets.values()) {
+            try {
+                baos.write(chunk);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return baos.toByteArray();
+    }
+
 }

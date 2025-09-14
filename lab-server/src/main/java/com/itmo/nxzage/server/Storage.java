@@ -1,9 +1,12 @@
 package com.itmo.nxzage.server;
 
+import java.sql.SQLException;
 import java.util.Iterator;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.TreeSet;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import com.itmo.nxzage.common.util.data.DataElement;
 import com.itmo.nxzage.common.util.exceptions.CSVParseException;
@@ -11,10 +14,12 @@ import com.itmo.nxzage.common.util.serialization.CSVConverter;
 import com.itmo.nxzage.server.exceptions.DumpException;
 import com.itmo.nxzage.server.exceptions.ReadException;
 import com.itmo.nxzage.server.logging.ServerLogger;
+import com.itmo.nxzage.server.services.db.dao.Dao;
 
 // TODO переписать на stream API
 public final class Storage<T extends DataElement<T>> {
     private CSVConverter<T> converter;
+    private Dao<T> dao;
     private DumpManager dumpManager;
     private TreeSet<T> collection;
     private final Logger logger = ServerLogger.getLogger("Storage");
@@ -30,12 +35,38 @@ public final class Storage<T extends DataElement<T>> {
         // }
     }
 
+    /** 
+     * constuctor for storage powered by DB
+     * 
+     */ 
+    public Storage(Dao<T> dao) {
+        this.dao = dao;
+    }
+
     /**
      * Загружает коллекцию из файла
      * @return true, если удалось 
      */
     public boolean load() {
-        return this.load(this.dumpManager);
+        return this.loadFromDB();
+    }
+
+    private boolean loadFromDB() {
+        try {
+            List<T> elements = dao.getAll();
+            if (elements == null) {
+                logger.severe("DB returned null-list of all data");
+                return false;
+            }
+            collection = new TreeSet<T>(elements);
+            logger.info("Data from the DB successfully loaded. Currents collection size: " + collection.size());
+            return true;
+        } catch (SQLException e) {
+            logger.severe("SQL Exception happened duiring loading data from DB.");
+            e.printStackTrace();
+            logger.severe("Failed to load data from the DB. Collcetion is null.");
+            return false;
+        }
     }
 
     private boolean load(DumpManager dumpManager) {
@@ -58,9 +89,11 @@ public final class Storage<T extends DataElement<T>> {
      * @return true, если удалось записать
      */
     public boolean dump() {
+        // * UNUSED
         return this.dump(this.dumpManager);
     }
 
+    // * UNUSED
     private boolean dump(DumpManager dumpManager) {
         try {
             String serializedCollection = converter.serialize(collection);
@@ -84,9 +117,20 @@ public final class Storage<T extends DataElement<T>> {
             throw new IllegalArgumentException("New element can\'t be null");
         }
         element.validate();
-        element.markID();
-        collection.add(element);
-        logger.info("Element with id=" + element.getID().toString() + " added");
+        logger.info("Element " + element.toString() + " is valid and ready to be added to the DB");
+        try {
+            Integer id = dao.save(element);
+            var newElement = dao.get(id).orElseThrow(() -> 
+                new IllegalStateException("Added element wasn't find")
+            );
+            collection.add(newElement);
+            logger.info("Element with id=" + element.getID().toString() + " added");
+        } catch (SQLException e) {
+            logger.info("Failed to save the elemtn to the DB: SQL exception orrued: " + e.getMessage());
+            e.printStackTrace();
+            throw new RuntimeException("Failed to save the element:", e);
+        }
+        // logger.info("Element with id=" + element.getID().toString() + " added");
     }
 
     /**
@@ -135,12 +179,23 @@ public final class Storage<T extends DataElement<T>> {
         if (element == null) {
             return false;
         }
-
-        boolean removed = collection.remove(element);
-        if (removed) {
-            logger.info("Element with id=" + id.toString() + " removed");
+        try {
+            boolean deleted = dao.delete(id);
+            if (deleted) {
+                if (!collection.remove(element)) {
+                    logger.severe("Element with id=" + id.toString() + "was removed from DB, but not from the collection.");
+                    throw new Error("Data integrity was violated");
+                }
+                logger.info("Element with id=" + id.toString() + " removed");
+            } else {
+                logger.info("Element with id=" + id.toString() + " was not removed");
+            }
+            return deleted;
+        } catch (SQLException e) {
+            logger.info("SQLException occured duiring attempt of the removing element with id=" + id.toString());
+            e.printStackTrace();
+            return false;
         }
-        return removed;
     }
 
     /**
@@ -166,10 +221,17 @@ public final class Storage<T extends DataElement<T>> {
         if (element == null) {
             return false;
         }
-
-        element.update(newElement);
-        logger.info("Element with id=" + id.toString() + " updated");
-        return true;
+        logger.info("New value of element with id=" + id.toString() + " is correct.");
+        try {
+            dao.update(id, newElement);
+            element.update(newElement);
+            logger.info("Element with id=" + id.toString() + " successfully updated");
+            return true;
+        } catch (SQLException e) {
+            logger.info("SQL Excpetion occured: failed update element.");
+            e.printStackTrace();
+            return false;
+        }
     }
 
     /**

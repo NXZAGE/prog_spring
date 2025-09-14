@@ -1,9 +1,7 @@
 package com.itmo.nxzage.client.io;
 
-import java.util.ArrayList;
 import java.util.EmptyStackException;
 import java.util.LinkedList;
-import java.util.Stack;
 import com.itmo.nxzage.client.exceptions.InfiniteReqursionException;
 import com.itmo.nxzage.client.exceptions.InputSourceHoldConflictException;
 import com.itmo.nxzage.client.exceptions.InvalidSourceHolderReleaseException;

@@ -3,6 +3,7 @@ package com.itmo.nxzage.server.services.storage;
 import java.util.Collection;
 import com.itmo.nxzage.common.util.data.DataElement;
 import com.itmo.nxzage.server.Storage;
+import com.itmo.nxzage.server.services.db.dao.Dao;
 
 /**
  * Универсальный сервис Storage с базовым интерфейсом (CRUD операции)
@@ -12,6 +13,7 @@ public class BaseStorageService<T extends DataElement<T>> {
 
     public BaseStorageService(Storage<T> storage) {
         this.storage = storage;
+        // TODO синхронизация с дао
     }
 
     /**

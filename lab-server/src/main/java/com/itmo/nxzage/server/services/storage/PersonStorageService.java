@@ -43,13 +43,14 @@ public class PersonStorageService extends BaseStorageService<Person> {
     }
 
     /**
-     * Удаляет элементы меньше заданного
+     * Удаляет элементы меньше заданного (принадлежащие пользователю)
      * @param reference заданный элемент
      * @return количество удаленных элементов
      */
-    public int removeLower(Person reference) {
+    public int removeLower(Person reference, Integer owner_id) {
         List<Person> toRemove = storage.getAll(false)
-                .takeWhile((element) -> (element.compareTo(reference) < 0)).toList();
+                .filter((element) -> element.getOwner().getId().equals(owner_id))
+            .takeWhile((element) -> (element.compareTo(reference) < 0)).toList();
         toRemove.forEach((element) -> storage.remove(element.getID()));
         return toRemove.size();
     }
@@ -78,5 +79,17 @@ public class PersonStorageService extends BaseStorageService<Person> {
     public Collection<Person> filterPassportIDPrefix(String prefix) {
         return storage.getAll(false)
                 .filter((element) -> element.getPassportID().startsWith(prefix)).toList();
+    }
+
+    @Override
+    public void clear() {
+        throw new UnsupportedOperationException("Method clear shoud be supplied with ownerId argument");
+    }
+
+    public void clear(Integer ownerId) {
+        List<Person> toRemove = storage.getAll(false)
+                .filter((element) -> element.getOwner().getId().equals(ownerId))
+                .toList();
+        toRemove.forEach((element) -> storage.remove(element.getID()));
     }
 }

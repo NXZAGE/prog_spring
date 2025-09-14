@@ -1,0 +1,8 @@
+add
+"Test User 1"
+100 200
+3000
+4000
+passport0001
+USA
+12345 67890 12 LOCATION_XYZ

@@ -1,5 +1,6 @@
 package com.itmo.nxzage.server;
 
+import java.util.logging.Logger;
 import com.itmo.nxzage.common.util.data.DataContainer;
 import com.itmo.nxzage.common.util.data.Person;
 import com.itmo.nxzage.common.util.exceptions.ValidationException;
@@ -18,8 +19,11 @@ import com.itmo.nxzage.server.commands.RemoveLowerCommand;
 import com.itmo.nxzage.server.commands.SaveCommand;
 import com.itmo.nxzage.server.commands.UpdateCommand;
 import com.itmo.nxzage.server.exceptions.CommandRecognitionException;
+import com.itmo.nxzage.server.logging.ServerLogger;
 
 public class CommandRecognizer {
+    private static final Logger logger = ServerLogger.getLogger("CommandRecognizer");
+
     private static String parseName(DataContainer command) throws CommandRecognitionException {
         try {
             command.assertType("name", String.class);
@@ -64,6 +68,7 @@ public class CommandRecognizer {
     public PersonStorageCommand recognize(DataContainer command)
             throws CommandRecognitionException {
         String name = parseName(command);
+        logger.info("Got command `%s`. Recognizing...".formatted(name));
         return switch (name) {
             case "info" -> new InfoCommand();
             case "show" -> new GetAllCommand();

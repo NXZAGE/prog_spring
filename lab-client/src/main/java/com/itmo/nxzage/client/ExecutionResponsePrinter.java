@@ -1,15 +1,10 @@
 package com.itmo.nxzage.client;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 import com.itmo.nxzage.client.io.OutputHandler;
+import com.itmo.nxzage.common.util.data.DataContainer;
 import com.itmo.nxzage.common.util.data.Person;
-import com.itmo.nxzage.common.util.net.response.DTO.CountryCollectionResponseDTO;
-import com.itmo.nxzage.common.util.net.response.DTO.NumberResponseDTO;
-import com.itmo.nxzage.common.util.net.response.DTO.PersonCollectionResponseDTO;
-import com.itmo.nxzage.common.util.net.response.DTO.PersonResponseDTO;
-import com.itmo.nxzage.common.util.net.response.DTO.ResponseDTO;
-import com.itmo.nxzage.common.util.net.response.DTO.StringResponseDTO;
+import com.itmo.nxzage.common.util.net.response.ResponseType;
 
 /**
  * Выводит результаты исполнения запросов
@@ -23,8 +18,8 @@ public class ExecutionResponsePrinter {
 
     @SuppressWarnings("unchecked")
     // TODO сделать чек красивее
-    private void handleSuccessful(ResponseDTO response) {
-        out.printMessage(response.message() + "\n");
+    private void handleSuccessful(DataContainer response) {
+        out.printMessage(response.get("message", String.class) + "\n");
         // if (response.has("person")) {
         //     out.printMessage(response.get("person", Person.class).toString() + "\n");
         // }
@@ -38,33 +33,40 @@ public class ExecutionResponsePrinter {
         // if (response.has("nationalities_collection")) {
         //     out.printCollection(response.get("nationalities_collection", Collection.class));
         // }
-        if (response instanceof PersonResponseDTO r) {
-            out.printMessage(r.data().toString() + "\n");
-        } else if (response instanceof StringResponseDTO r) {
-            out.printMessage(r.data() + "\n");
-        } else if (response instanceof NumberResponseDTO r) {
-            out.printError(r.value().toString() + "\n");
-        } else if (response instanceof PersonCollectionResponseDTO r) {
-            out.printCollection(r.data().stream().map(obj -> (Object) obj).toList());
-        } else if (response instanceof CountryCollectionResponseDTO r) {
-            out.printCollection(r.data().stream().map(obj -> (Object) obj).toList());
+        switch (response.get("response_type", ResponseType.class)) {
+            case PERSON: 
+                out.printMessage(response.get("data", Person.class).toString() + "\n");
+                break;
+            case STRINGS: 
+                out.printMessage(response.get("data", String.class) + "\n");
+                break;
+            case NUMBER: 
+                out.printError(response.get("value", Integer.class).toString() + "\n");
+                break;
+            case PERSON_COLLECTION: 
+                out.printCollection(response.get("data", List.class).stream().map(obj -> (Object) obj).toList()); // TODO gson/jackson typereference
+                break;
+            case COUNTRY_COLLECTION: 
+                out.printCollection(response.get("data", List.class).stream().map(obj -> (Object) obj).toList()); 
+                break;
+            case DEFAULT: break;
         }
     }
 
-    private void handleError(ResponseDTO response) {
-        out.printError("[SERVER ERROR] " + response.message() + "\n");
+    private void handleError(DataContainer response) {
+        out.printError("[SERVER ERROR] " + response.get("message", String.class) + "\n");
     }
 
-    private void handleCritical(ResponseDTO response) {
-        out.printError("[CRITICAL] " + response.message() + "\n");
+    private void handleCritical(DataContainer response) {
+        out.printError("[CRITICAL] " + response.get("message", String.class) + "\n");
     }
 
-    public void handle(ResponseDTO response) {
+    public void handle(DataContainer response) {
         // TODO realisation
-        
-        // response.assertType("status", String.class);
-        // response.assertType("message", String.class);
-        switch (response.status()) {
+        response.assertType("response_type", ResponseType.class);
+        response.assertType("status", String.class);
+        response.assertType("message", String.class);
+        switch (response.get("status", String.class)) {
             case "success" -> handleSuccessful(response);     
             case "error" -> handleError(response);
             case "critical" -> handleCritical(response);   

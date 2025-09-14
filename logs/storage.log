@@ -967,3 +967,396 @@
 [INFO] Storage - Collection successfully dumped
 [INFO] Storage - Serialized collection ready to dump. Size: 2465
 [INFO] Storage - Collection successfully dumped
+[INFO] Storage - Collection deserialized from files. Objects count: 16
+[INFO] Storage - Collection deserialized from files. Objects count: 16
+[INFO] Storage - Element with id=20 added
+[INFO] Storage - Serialized collection ready to dump. Size: 2626
+[INFO] Storage - Collection successfully dumped
+[SEVERE] Storage - DB returned null-list of all data
+[SEVERE] Storage - SQL Exception happened duiring loading data from DB.
+[SEVERE] Storage - Failed to load data from the DB. Collcetion is null.
+[SEVERE] Storage - SQL Exception happened duiring loading data from DB.
+[SEVERE] Storage - Failed to load data from the DB. Collcetion is null.
+[SEVERE] Storage - SQL Exception happened duiring loading data from DB.
+[SEVERE] Storage - Failed to load data from the DB. Collcetion is null.
+[SEVERE] Storage - SQL Exception happened duiring loading data from DB.
+[SEVERE] Storage - Failed to load data from the DB. Collcetion is null.
+[SEVERE] Storage - SQL Exception happened duiring loading data from DB.
+[SEVERE] Storage - Failed to load data from the DB. Collcetion is null.
+[INFO] Storage - Data from the DB successfully loaded. Currents collection size: 0
+[INFO] Storage - Data from the DB successfully loaded. Currents collection size: 0
+[INFO] Storage - Data from the DB successfully loaded. Currents collection size: 0
+[INFO] Storage - Data from the DB successfully loaded. Currents collection size: 0
+[INFO] Storage - Data from the DB successfully loaded. Currents collection size: 0
+[INFO] Storage - Data from the DB successfully loaded. Currents collection size: 0
+[INFO] Storage - Data from the DB successfully loaded. Currents collection size: 0
+[INFO] Storage - Data from the DB successfully loaded. Currents collection size: 0
+[INFO] Storage - Data from the DB successfully loaded. Currents collection size: 0
+[INFO] Storage - Data from the DB successfully loaded. Currents collection size: 0
+[INFO] Storage - Element OBJECT PERSON [
+  ID: 0
+  Creation date: <13.09.2025 12:52:41 MSK>
+  Name: Test User 1
+  Coordinates: Coordinates(100.000000, 200.000000)
+  Height: 3000.000000 cm
+  Weight: 4000 kg
+  Passport ID: passport0001
+  Nationality: The United States of America
+  Location: Location["LOCATION_XYZ"](12345.000000, 67890, 12)
+] is valid and ready to be added to the DB
+[INFO] Storage - Data from the DB successfully loaded. Currents collection size: 0
+[INFO] Storage - Data from the DB successfully loaded. Currents collection size: 0
+[INFO] Storage - Data from the DB successfully loaded. Currents collection size: 0
+[INFO] Storage - Data from the DB successfully loaded. Currents collection size: 0
+[INFO] Storage - Data from the DB successfully loaded. Currents collection size: 0
+[INFO] Storage - Data from the DB successfully loaded. Currents collection size: 0
+[INFO] Storage - Data from the DB successfully loaded. Currents collection size: 0
+[INFO] Storage - Element OBJECT PERSON [
+  ID: 0
+  Creation date: <14.09.2025 12:26:39 MSK>
+  Name: ds
+  Coordinates: Coordinates(10.000000, 10.000000)
+  Height: 1010.000000 cm
+  Weight: 1010 kg
+  Passport ID: 1010101
+  Nationality: The United States of America
+  Location: Location["lkjdf"](393.000000, 93, 93)
+] is valid and ready to be added to the DB
+[INFO] Storage - Data from the DB successfully loaded. Currents collection size: 0
+[INFO] Storage - Data from the DB successfully loaded. Currents collection size: 0
+[SEVERE] Storage - SQL Exception happened duiring loading data from DB.
+[SEVERE] Storage - Failed to load data from the DB. Collcetion is null.
+[SEVERE] Storage - SQL Exception happened duiring loading data from DB.
+[SEVERE] Storage - Failed to load data from the DB. Collcetion is null.
+[INFO] Storage - Data from the DB successfully loaded. Currents collection size: 0
+[INFO] Storage - Element OBJECT PERSON [
+  ID: 0
+  USER[id: 3, name: 'admin']
+  Creation date: <14.09.2025 15:06:33 MSK>
+  Name: Test User 1
+  Coordinates: Coordinates(100.000000, 200.000000)
+  Height: 3000.000000 cm
+  Weight: 4000 kg
+  Passport ID: passport0001
+  Nationality: The United States of America
+  Location: Location["LOCATION_XYZ"](12345.000000, 67890, 12)
+] is valid and ready to be added to the DB
+[INFO] Storage - Data from the DB successfully loaded. Currents collection size: 0
+[INFO] Storage - Element OBJECT PERSON [
+  ID: 0
+  USER[id: 3, name: 'admin']
+  Creation date: <14.09.2025 15:10:03 MSK>
+  Name: Test User 1
+  Coordinates: Coordinates(100.000000, 200.000000)
+  Height: 3000.000000 cm
+  Weight: 4000 kg
+  Passport ID: passport0001
+  Nationality: The United States of America
+  Location: Location["LOCATION_XYZ"](12345.000000, 67890, 12)
+] is valid and ready to be added to the DB
+[INFO] Storage - Data from the DB successfully loaded. Currents collection size: 0
+[INFO] Storage - Element OBJECT PERSON [
+  ID: 0
+  USER[id: 3, name: 'admin']
+  Creation date: <14.09.2025 15:11:47 MSK>
+  Name: Test User 1
+  Coordinates: Coordinates(100.000000, 200.000000)
+  Height: 3000.000000 cm
+  Weight: 4000 kg
+  Passport ID: passport0001
+  Nationality: The United States of America
+  Location: Location["LOCATION_XYZ"](12345.000000, 67890, 12)
+] is valid and ready to be added to the DB
+[INFO] Storage - Data from the DB successfully loaded. Currents collection size: 0
+[INFO] Storage - Element OBJECT PERSON [
+  ID: 0
+  USER[id: 3, name: 'admin']
+  Creation date: <14.09.2025 15:38:54 MSK>
+  Name: Test User 1
+  Coordinates: Coordinates(100.000000, 200.000000)
+  Height: 3000.000000 cm
+  Weight: 4000 kg
+  Passport ID: passport0001
+  Nationality: The United States of America
+  Location: Location["LOCATION_XYZ"](12345.000000, 67890, 12)
+] is valid and ready to be added to the DB
+[INFO] Storage - Data from the DB successfully loaded. Currents collection size: 0
+[INFO] Storage - Element OBJECT PERSON [
+  ID: 0
+  USER[id: 3, name: 'admin']
+  Creation date: <14.09.2025 15:39:22 MSK>
+  Name: Test User 1
+  Coordinates: Coordinates(100.000000, 200.000000)
+  Height: 3000.000000 cm
+  Weight: 4000 kg
+  Passport ID: passport0001
+  Nationality: The United States of America
+  Location: Location["LOCATION_XYZ"](12345.000000, 67890, 12)
+] is valid and ready to be added to the DB
+[INFO] Storage - Data from the DB successfully loaded. Currents collection size: 0
+[INFO] Storage - Element OBJECT PERSON [
+  ID: 0
+  USER[id: 3, name: 'admin']
+  Creation date: <14.09.2025 15:39:57 MSK>
+  Name: Test User 1
+  Coordinates: Coordinates(100.000000, 200.000000)
+  Height: 3000.000000 cm
+  Weight: 4000 kg
+  Passport ID: passport0001
+  Nationality: The United States of America
+  Location: Location["LOCATION_XYZ"](12345.000000, 67890, 12)
+] is valid and ready to be added to the DB
+[INFO] Storage - Data from the DB successfully loaded. Currents collection size: 0
+[INFO] Storage - Element OBJECT PERSON [
+  ID: 0
+  USER[id: 3, name: 'admin']
+  Creation date: <14.09.2025 15:40:16 MSK>
+  Name: Test User 1
+  Coordinates: Coordinates(100.000000, 200.000000)
+  Height: 3000.000000 cm
+  Weight: 4000 kg
+  Passport ID: passport0001
+  Nationality: The United States of America
+  Location: Location["LOCATION_XYZ"](12345.000000, 67890, 12)
+] is valid and ready to be added to the DB
+[INFO] Storage - Data from the DB successfully loaded. Currents collection size: 0
+[INFO] Storage - Element OBJECT PERSON [
+  ID: 0
+  USER[id: 3, name: 'admin']
+  Creation date: <14.09.2025 15:42:36 MSK>
+  Name: Test User 1
+  Coordinates: Coordinates(100.000000, 200.000000)
+  Height: 3000.000000 cm
+  Weight: 4000 kg
+  Passport ID: passport0001
+  Nationality: The United States of America
+  Location: Location["LOCATION_XYZ"](12345.000000, 67890, 12)
+] is valid and ready to be added to the DB
+[INFO] Storage - Data from the DB successfully loaded. Currents collection size: 0
+[INFO] Storage - Element OBJECT PERSON [
+  ID: 0
+  USER[id: 3, name: 'admin']
+  Creation date: <14.09.2025 15:44:07 MSK>
+  Name: Test User 1
+  Coordinates: Coordinates(100.000000, 200.000000)
+  Height: 3000.000000 cm
+  Weight: 4000 kg
+  Passport ID: passport0001
+  Nationality: The United States of America
+  Location: Location["LOCATION_XYZ"](12345.000000, 67890, 12)
+] is valid and ready to be added to the DB
+[INFO] Storage - Element OBJECT PERSON [
+  ID: 0
+  USER[id: 3, name: 'admin']
+  Creation date: <14.09.2025 15:44:08 MSK>
+  Name: Test User 1
+  Coordinates: Coordinates(100.000000, 200.000000)
+  Height: 3000.000000 cm
+  Weight: 4000 kg
+  Passport ID: passport0001
+  Nationality: The United States of America
+  Location: Location["LOCATION_XYZ"](12345.000000, 67890, 12)
+] is valid and ready to be added to the DB
+[INFO] Storage - Element OBJECT PERSON [
+  ID: 0
+  USER[id: 3, name: 'admin']
+  Creation date: <14.09.2025 15:44:28 MSK>
+  Name: Test User 1
+  Coordinates: Coordinates(100.000000, 200.000000)
+  Height: 3000.000000 cm
+  Weight: 4000 kg
+  Passport ID: passport0001
+  Nationality: The United States of America
+  Location: Location["LOCATION_XYZ"](12345.000000, 67890, 12)
+] is valid and ready to be added to the DB
+[INFO] Storage - Data from the DB successfully loaded. Currents collection size: 0
+[INFO] Storage - Element OBJECT PERSON [
+  ID: 0
+  USER[id: 3, name: 'admin']
+  Creation date: <14.09.2025 15:45:48 MSK>
+  Name: Test User 1
+  Coordinates: Coordinates(100.000000, 200.000000)
+  Height: 3000.000000 cm
+  Weight: 4000 kg
+  Passport ID: passport0001
+  Nationality: The United States of America
+  Location: Location["LOCATION_XYZ"](12345.000000, 67890, 12)
+] is valid and ready to be added to the DB
+[INFO] Storage - Data from the DB successfully loaded. Currents collection size: 0
+[INFO] Storage - Element OBJECT PERSON [
+  ID: 0
+  USER[id: 3, name: 'admin']
+  Creation date: <14.09.2025 15:46:43 MSK>
+  Name: Test User 1
+  Coordinates: Coordinates(100.000000, 200.000000)
+  Height: 3000.000000 cm
+  Weight: 4000 kg
+  Passport ID: passport0001
+  Nationality: The United States of America
+  Location: Location["LOCATION_XYZ"](12345.000000, 67890, 12)
+] is valid and ready to be added to the DB
+[SEVERE] Storage - SQL Exception happened duiring loading data from DB.
+[SEVERE] Storage - Failed to load data from the DB. Collcetion is null.
+[INFO] Storage - Data from the DB successfully loaded. Currents collection size: 1
+[INFO] Storage - Element OBJECT PERSON [
+  ID: 0
+  USER[id: 3, name: 'admin']
+  Creation date: <14.09.2025 15:50:01 MSK>
+  Name: Test User 1
+  Coordinates: Coordinates(100.000000, 200.000000)
+  Height: 3000.000000 cm
+  Weight: 4000 kg
+  Passport ID: passport0001
+  Nationality: The United States of America
+  Location: Location["LOCATION_XYZ"](12345.000000, 67890, 12)
+] is valid and ready to be added to the DB
+[INFO] Storage - Data from the DB successfully loaded. Currents collection size: 2
+[INFO] Storage - Data from the DB successfully loaded. Currents collection size: 0
+[INFO] Storage - Element OBJECT PERSON [
+  ID: 0
+  USER[id: 3, name: 'admin']
+  Creation date: <14.09.2025 16:52:01 MSK>
+  Name: Test User 1
+  Coordinates: Coordinates(100.000000, 200.000000)
+  Height: 3000.000000 cm
+  Weight: 4000 kg
+  Passport ID: passport0001
+  Nationality: The United States of America
+  Location: Location["LOCATION_XYZ"](12345.000000, 67890, 12)
+] is valid and ready to be added to the DB
+[INFO] Storage - Data from the DB successfully loaded. Currents collection size: 1
+[INFO] Storage - Data from the DB successfully loaded. Currents collection size: 1
+[INFO] Storage - Element OBJECT PERSON [
+  ID: 0
+  USER[id: 3, name: 'admin']
+  Creation date: <14.09.2025 17:04:50 MSK>
+  Name: ADMIN
+  Coordinates: Coordinates(848.000000, 333.000000)
+  Height: 19999.000000 cm
+  Weight: 50 kg
+  Passport ID: ADMINxx90
+  Nationality: Japanese Empire
+  Location: Location["UUUUUwU"](12.000000, 12, 12)
+] is valid and ready to be added to the DB
+[INFO] Storage - Failed to save the elemtn to the DB: SQL exception orrued: ERROR: syntax error at or near "."
+  Position: 317
+[INFO] Storage - Data from the DB successfully loaded. Currents collection size: 2
+[INFO] Storage - Element OBJECT PERSON [
+  ID: 0
+  USER[id: 3, name: 'admin']
+  Creation date: <14.09.2025 17:07:47 MSK>
+  Name: Test User 1
+  Coordinates: Coordinates(100.000000, 200.000000)
+  Height: 3000.000000 cm
+  Weight: 4000 kg
+  Passport ID: passport0001
+  Nationality: The United States of America
+  Location: Location["LOCATION_XYZ"](12345.000000, 67890, 12)
+] is valid and ready to be added to the DB
+[INFO] Storage - Failed to save the elemtn to the DB: SQL exception orrued: ERROR: missing FROM-clause entry for table "users"
+  Position: 429
+[INFO] Storage - Data from the DB successfully loaded. Currents collection size: 3
+[INFO] Storage - Element OBJECT PERSON [
+  ID: 0
+  USER[id: 3, name: 'admin']
+  Creation date: <14.09.2025 17:09:30 MSK>
+  Name: Test User 1
+  Coordinates: Coordinates(100.000000, 200.000000)
+  Height: 3000.000000 cm
+  Weight: 4000 kg
+  Passport ID: passport0001
+  Nationality: The United States of America
+  Location: Location["LOCATION_XYZ"](12345.000000, 67890, 12)
+] is valid and ready to be added to the DB
+[INFO] Storage - Element with id=0 added
+[INFO] Storage - Data from the DB successfully loaded. Currents collection size: 4
+[INFO] Storage - New value of element with id=4 is correct.
+[INFO] Storage - Element with id=4 successfully updated
+[INFO] Storage - Element with id=3 removed
+[INFO] Storage - Data from the DB successfully loaded. Currents collection size: 3
+[INFO] Storage - Element OBJECT PERSON [
+  ID: 0
+  USER[id: 4, name: 'user']
+  Creation date: <14.09.2025 18:32:34 MSK>
+  Name: User ABOBA
+  Coordinates: Coordinates(23.000000, 23.000000)
+  Height: 7774532.000000 cm
+  Weight: 139 kg
+  Passport ID: yyyyyyABOba888
+  Nationality: France
+  Location: Location["LocationPPParbitrazh"](12.000000, 12, 12)
+] is valid and ready to be added to the DB
+[INFO] Storage - Element with id=0 added
+[INFO] Storage - Element OBJECT PERSON [
+  ID: 0
+  USER[id: 4, name: 'user']
+  Creation date: <14.09.2025 18:33:28 MSK>
+  Name: Test User 1
+  Coordinates: Coordinates(100.000000, 200.000000)
+  Height: 3000.000000 cm
+  Weight: 4000 kg
+  Passport ID: passport0001
+  Nationality: The United States of America
+  Location: Location["LOCATION_XYZ"](12345.000000, 67890, 12)
+] is valid and ready to be added to the DB
+[INFO] Storage - Element with id=0 added
+[INFO] Storage - New value of element with id=6 is correct.
+[INFO] Storage - Element with id=6 successfully updated
+[INFO] Storage - Element OBJECT PERSON [
+  ID: 0
+  USER[id: 4, name: 'user']
+  Creation date: <14.09.2025 18:35:45 MSK>
+  Name: Test User 1
+  Coordinates: Coordinates(100.000000, 200.000000)
+  Height: 3000.000000 cm
+  Weight: 4000 kg
+  Passport ID: passport0001
+  Nationality: The United States of America
+  Location: Location["LOCATION_XYZ"](12345.000000, 67890, 12)
+] is valid and ready to be added to the DB
+[INFO] Storage - Element with id=0 added
+[INFO] Storage - Element with id=7 removed
+[INFO] Storage - Data from the DB successfully loaded. Currents collection size: 5
+[INFO] Storage - Data from the DB successfully loaded. Currents collection size: 5
+[INFO] Storage - Element OBJECT PERSON [
+  ID: 0
+  USER[id: 8, name: 'user1']
+  Creation date: <14.09.2025 18:44:19 MSK>
+  Name: New name
+  Coordinates: Coordinates(8.000000, 8.000000)
+  Height: 1212.000000 cm
+  Weight: 3113 kg
+  Passport ID: passportXXXXXX
+  Nationality: Japanese Empire
+  Location: Location["LOCATION_SDF"](90909.000000, 94545, 90)
+] is valid and ready to be added to the DB
+[INFO] Storage - Element with id=0 added
+[INFO] Storage - Element OBJECT PERSON [
+  ID: 0
+  USER[id: 8, name: 'user1']
+  Creation date: <14.09.2025 18:44:20 MSK>
+  Name: Oh no cringe
+  Coordinates: Coordinates(8943.000000, 343.000000)
+  Height: 232145.000000 cm
+  Weight: 34234234 kg
+  Passport ID: reeeeq3223
+  Nationality: The United States of America
+  Location: Location["missN_SSSSS990"](90909.000000, 9453, 90)
+] is valid and ready to be added to the DB
+[INFO] Storage - Element with id=0 added
+[INFO] Storage - Element OBJECT PERSON [
+  ID: 0
+  USER[id: 8, name: 'user1']
+  Creation date: <14.09.2025 18:44:21 MSK>
+  Name: slutt savage 
+  Coordinates: Coordinates(3438943.000000, 343.000000)
+  Height: 245.435440 cm
+  Weight: 3423423 kg
+  Passport ID: 8PEDeeq3223
+  Nationality: Spain
+  Location: Location["LOCATION_SSSSS990"](90909.000000, 945, 90)
+] is valid and ready to be added to the DB
+[INFO] Storage - Element with id=0 added
+[INFO] Storage - Element with id=10 removed
+[INFO] Storage - Element with id=8 removed
+[INFO] Storage - Element with id=9 removed

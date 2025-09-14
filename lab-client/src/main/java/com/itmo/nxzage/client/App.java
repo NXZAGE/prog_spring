@@ -2,6 +2,8 @@ package com.itmo.nxzage.client;
 
 import java.io.FileNotFoundException;
 import java.text.ParseException;
+import com.itmo.nxzage.client.auth.AuthService;
+import com.itmo.nxzage.client.auth.User;
 import com.itmo.nxzage.client.commands.Command;
 import com.itmo.nxzage.client.commands.CommandRegister;
 import com.itmo.nxzage.client.commands.Command.Type;
@@ -18,6 +20,7 @@ import com.itmo.nxzage.client.parsing.fields.IDField;
 import com.itmo.nxzage.client.parsing.fields.PassportPrefixField;
 import com.itmo.nxzage.client.parsing.fields.ServerAddressField;
 import com.itmo.nxzage.client.parsing.fields.ServerPortField;
+import com.itmo.nxzage.client.parsing.forms.AuthForm;
 import com.itmo.nxzage.client.parsing.forms.CommandForm;
 import com.itmo.nxzage.client.parsing.forms.PersonArgForm;
 import com.itmo.nxzage.client.parsing.forms.PersonForm;
@@ -36,7 +39,13 @@ public class App {
     private CommandParser parser;
     private CommandExecutor executor;
     private ExecutionResponsePrinter printer;
+    private static final AuthService auth;
     private boolean running = false;
+
+    static {
+        auth = new AuthService();
+        auth.setLoggedIn(false);
+    }
 
     /**
      * Инициализатор CommandRegister
@@ -66,6 +75,9 @@ public class App {
         CR.recordCommand("set_hostname", Type.CLIENT, new ServerAddressField(), null);
         CR.recordCommand("set_hostport", Type.CLIENT, new ServerPortField(), null);
         CR.recordCommand("show_server_socket", Type.CLIENT, null, null);
+        CR.recordCommand("register", Type.SERVER, null, new AuthForm());
+        CR.recordCommand("login", Type.CLIENT, null, new AuthForm());
+        CR.recordCommand("logout", Type.CLIENT, null, null);
         return CR;
     }
 
@@ -84,8 +96,7 @@ public class App {
             throw new IllegalArgumentException("Expected server command");
         }
 
-
-        
+        auth.authCommand(command);
         printer.handle(executor.execute(command));
     }
 
@@ -110,6 +121,12 @@ public class App {
             case "show_server_socket": 
                 showServerSocket();
                 break;
+            case "login":
+                login((String) command.getArgs().get("username"), (String) command.getArgs().get("user_password"));
+                break;
+            case "logout":
+                logout();
+                break;
             case "exit": 
                 exit();
                 break;
@@ -130,7 +147,7 @@ public class App {
                         "- `add_if_max {element}` : добавить новый элемент в коллекцию, если его значение превышает значение наибольшего элемента этой коллекции\n" + //
                         "- `add_if_min {element}` : добавить новый элемент в коллекцию, если его значение меньше, чем у наименьшего элемента этой коллекции\n" + //
                         "- `remove_lower {element}` : удалить из коллекции все элементы, меньшие, чем заданный\n" + //
-                        "- `filter_starts_with_passport_i_d passportID` : вывести элементы, значение поля passportID которых начинается с заданной подстроки\n" + //
+                        "- `filter_starts_with_passport_id passportID` : вывести элементы, значение поля passportID которых начинается с заданной подстроки\n" + //
                         "- `print_field_ascending_nationality` : вывести значения поля nationality всех элементов в порядке возрастания\n" + //
                         "- `print_field_descending_nationality` : вывести значения поля nationality всех элементов в порядке убывания";
         out.printSpecial(help + "\n");
@@ -162,6 +179,17 @@ public class App {
     private void showServerSocket() {
         out.printMessage("Hostname: " + ClientConfig.getHostname() + "\n");
         out.printMessage("Hostport: " + String.valueOf(ClientConfig.getHostport()) + "\n");
+    }
+
+    private void login(String username, String password) {
+        var user = new User(username, password);
+        auth.setCurrentUser(user);
+        auth.setLoggedIn(true);
+    }
+
+    private void logout() {
+        auth.setCurrentUser(null);
+        auth.setLoggedIn(false);
     }
 
     private void exit() {

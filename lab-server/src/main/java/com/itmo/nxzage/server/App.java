@@ -4,10 +4,12 @@ import java.net.SocketException;
 import java.util.Map;
 import java.util.logging.Logger;
 import com.itmo.nxzage.common.util.data.Person;
+import com.itmo.nxzage.common.util.net.Packet;
 import com.itmo.nxzage.common.util.serialization.PersonConverter;
 import com.itmo.nxzage.server.logging.ServerLogger;
 import com.itmo.nxzage.server.net.InteractionContext;
 import com.itmo.nxzage.server.responses.ExecutionResponse;
+import com.itmo.nxzage.server.services.db.dao.PersonDAO;
 import com.itmo.nxzage.server.services.net.UDPTransportService;
 import com.itmo.nxzage.server.services.storage.PersonStorageService;
 
@@ -16,7 +18,7 @@ import com.itmo.nxzage.server.services.storage.PersonStorageService;
  */
 public final class App {
     private static final int PORT = 3666; 
-    private static final int BUFFER_SIZE = 4000;
+    private static final int BUFFER_SIZE = 1024;
     private Storage<Person> storage;
     private PersonStorageService services;
     private UDPTransportService transportService;
@@ -40,7 +42,8 @@ public final class App {
      */
     public void init(String filename) {
         // TODO сделать что то типо универсальной ошибки пизданувшегося сервера
-        storage = new Storage<Person>(filename, new PersonConverter());
+        // storage = new Storage<Person>(filename, new PersonConverter());
+        storage = new Storage<Person>(new PersonDAO());
         logger.info("Storage initialized");
         services = new PersonStorageService(storage);
         logger.info("Storage Services initialized");
@@ -48,7 +51,7 @@ public final class App {
         logger.info("Controller initialized");
         if (!storage.load()) {
             logger.severe("Storage connection to file failed");
-            throw new IllegalStateException("Unable to create storage: wrong filename");
+            throw new IllegalStateException("Unable to create storage.");
         }
         Person.updateNextID(storage.getAll(running).toList());
         logger.info("Peron NextID updated");
@@ -69,9 +72,9 @@ public final class App {
         running = true;
         while (running) {
             try {
-                InteractionContext interaction = transportService.receiveRequest();  
+                InteractionContext interaction = new InteractionContext(transportService.receiveRequest());  
                 controller.handle(interaction);
-                transportService.sendResponse(interaction);
+                transportService.sendResponse(interaction.getResponses());
             } catch (RuntimeException e) {
                 logger.warning("Failed during processing request. Details: " + e.getMessage());
                 e.printStackTrace();

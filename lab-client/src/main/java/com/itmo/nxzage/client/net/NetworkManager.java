@@ -1,23 +1,16 @@
 package com.itmo.nxzage.client.net;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.SortedMap;
-import java.util.TreeMap;
 import java.util.UUID;
 import com.itmo.nxzage.client.commands.Command;
 import com.itmo.nxzage.client.exceptions.ResponseTimeOutException;
 import com.itmo.nxzage.client.exceptions.ServerInteractionFailedException;
-import com.itmo.nxzage.common.util.net.PacketWrapper;
-import com.itmo.nxzage.common.util.net.response.DTO.ResponseDTO;
-import com.itmo.nxzage.common.util.net.response.DTO.ResponseHeader;
-import com.itmo.nxzage.common.util.serialization.Packetizer;
-import com.itmo.nxzage.common.util.serialization.SerializationUtil;
+import com.itmo.nxzage.common.util.data.DataContainer;
+import com.itmo.nxzage.common.util.net.Packet;
+import com.itmo.nxzage.common.util.net.PacketType;
 
 public class NetworkManager {
     private static int REQUEST_SENDING_ATTEMPTS_LIMIT = 2;
-    private static int RESPONSE_WAITING_TIME_LIMIT = 200;
+    private static int RESPONSE_WAITING_TIME_LIMIT = 2000;
     // TODO make static timeout val
     private UDPTransportService transportService;
     // TODO make init
@@ -26,15 +19,15 @@ public class NetworkManager {
         transportService = new UDPTransportService(hostname, port);
     }
 
-    public ResponseDTO interact(Command command) {
-        PacketWrapper packet = CommandPacker.pack(command);
-        UUID intercationID = packet.getInteractionID();
+    public DataContainer interact(Command command) {
+        Packet request = createRequest(command);
+        UUID intercationID = request.getInteractionID();
         int attemptsLeft = REQUEST_SENDING_ATTEMPTS_LIMIT;
         while (attemptsLeft > 0) {
             try {
                 attemptsLeft--;
-                sendRequest(packet);
-                return receiveResponse(intercationID);
+                sendRequest(request);
+                return unpackResponse(receiveResponse(intercationID));
             } catch (ResponseTimeOutException e) {
                 continue;
             }
@@ -42,62 +35,66 @@ public class NetworkManager {
         throw new ServerInteractionFailedException("Failed to interact with server");
     }
 
-    public void sendRequest(PacketWrapper request) {
+    public Packet createRequest(Command command) {
+        return CommandPacker.pack(command);
+    }
+
+    public void sendRequest(Packet request) {
         transportService.send(request);
     }
 
-    public ResponseDTO receiveResponse(UUID interactionID) {
-        // TODO realisation
-        SortedMap<Integer, byte[]> packets = new TreeMap<>();
-        ResponseDTO response = null;
-        boolean headerReceived = false;
-        int expectingPackets = 1;        
-        while (expectingPackets > packets.size()) {
-            byte[] packet = transportService.receive(interactionID, RESPONSE_WAITING_TIME_LIMIT);
-            Integer packetNumber = Packetizer.getPacketNumber(packet);
-            packet = Arrays.copyOfRange(packet, 20, packet.length);
-            if (packetNumber == 0) {    // header packet processing
-                try {
-                    ResponseHeader header = SerializationUtil.deserialize(packet, ResponseHeader.class);
-                    expectingPackets = header.packageCount();
-                    headerReceived = true;
-                } catch (IOException e) {
-                    throw new RuntimeException("Failed to assemble server response", e);
-                } catch (ClassNotFoundException e) {
-                    throw new Error("CRITICAL! Failed to link response header class");
-                }
-            } else {                    // payload packet processing
-                if (!headerReceived) {
-                    expectingPackets++;
-                }
-                packets.put(packetNumber, packet);
-            }      
-        }
-        // payload assembling
-        if (headerReceived && packets.size() == expectingPackets) {
-            try {
-                response = SerializationUtil.deserialize(assemblePayload(packets), ResponseDTO.class);
-            } catch (IOException e) {
-                throw new RuntimeException("Failed to assemble server response");
-            } catch (ClassNotFoundException e) {
-                throw new Error("CRITICAL! Failed to link response header class");
-            }
-        }
-        return response;
+    public Packet receiveResponse(UUID interactionID) {
+        return transportService.receive(interactionID, RESPONSE_WAITING_TIME_LIMIT);
     }
 
-    public static byte[] assemblePayload(SortedMap<Integer, byte[]> packets) {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        for (byte[] chunk : packets.values()) {
-            try {
-                baos.write(chunk);
-            } catch (IOException e) {
-                // unreal exception
-                continue;
-            }
+    public DataContainer unpackResponse(Packet response) {
+        if (!response.getType().equals(PacketType.RESPONSE)) {
+            throw new RuntimeException("Unsupporteed response type was got");
         }
-        return baos.toByteArray();
+        return response.getPayload();
     }
+
+    // public DataContainer receiveResponse(UUID interactionID) {
+    //     // TODO realisation
+    //     SortedMap<Integer, byte[]> packets = new TreeMap<>();
+    //     ResponseDTO response = null;
+    //     boolean headerReceived = false;
+    //     int expectingPackets = 1;        
+    //     while (expectingPackets > packets.size()) {
+    //         byte[] packet = transportService.receive(interactionID, RESPONSE_WAITING_TIME_LIMIT);
+    //         Integer packetNumber = Packetizer.getPacketNumber(packet);
+    //         packet = Arrays.copyOfRange(packet, 20, packet.length);
+    //         if (packetNumber == 0) {    // header packet processing
+    //             try {
+    //                 PacketHeader header = SerializationUtil.deserialize(packet, PacketHeader.class);
+    //                 expectingPackets = header.packageCount();
+    //                 headerReceived = true;
+    //             } catch (IOException e) {
+    //                 throw new RuntimeException("Failed to assemble server response", e);
+    //             } catch (ClassNotFoundException e) {
+    //                 throw new Error("CRITICAL! Failed to link response header class");
+    //             }
+    //         } else {                    // payload packet processing
+    //             if (!headerReceived) {
+    //                 expectingPackets++;
+    //             }
+    //             packets.put(packetNumber, packet);
+    //         }      
+    //     }
+    //     // payload assembling
+    //     if (headerReceived && packets.size() == expectingPackets) {
+    //         try {
+    //             response = SerializationUtil.deserialize(assemblePayload(packets), ResponseDTO.class);
+    //         } catch (IOException e) {
+    //             throw new RuntimeException("Failed to assemble server response");
+    //         } catch (ClassNotFoundException e) {
+    //             throw new Error("CRITICAL! Failed to link response header class");
+    //         }
+    //     }
+    //     return response;
+    // }
+
+
 
     // public DataContainer receiveLightResponse(UUID interactionID) {
     //     PacketWrapper packet = transportService.receive(REQUEST_SENDING_ATTEMPTS_LIMIT);

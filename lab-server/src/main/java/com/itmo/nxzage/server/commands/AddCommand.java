@@ -1,6 +1,7 @@
 package com.itmo.nxzage.server.commands;
 
 import com.itmo.nxzage.common.util.data.Person;
+import com.itmo.nxzage.common.util.data.User;
 import com.itmo.nxzage.server.responses.ExecutionResponse;
 import com.itmo.nxzage.server.services.storage.PersonStorageService;
 
@@ -24,4 +25,12 @@ public final class AddCommand extends PersonStorageCommand {
         return response;
     }
 
+    @Override
+    public void setUser(User user) {
+        if (this.user != null) {
+            throw new IllegalStateException("User already set");
+        }
+        this.user = user;
+        this.element.setOwner(user);
+    }
 }

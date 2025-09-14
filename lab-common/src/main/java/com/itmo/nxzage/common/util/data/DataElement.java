@@ -17,4 +17,6 @@ public abstract class DataElement<T extends DataElement<T>> implements Validatab
     }
 
     public abstract void markID();
+
+    public abstract void setID(Integer id);
 }

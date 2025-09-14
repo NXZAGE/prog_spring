@@ -2,6 +2,8 @@ package com.itmo.nxzage.server.responses;
 
 import java.util.List;
 import com.itmo.nxzage.common.util.data.Country;
+import com.itmo.nxzage.common.util.data.DataContainer;
+import com.itmo.nxzage.common.util.net.response.ResponseType;
 
 public final class CountryCollectionResponse extends ExecutionResponse {
     List<Country> data;
@@ -12,5 +14,14 @@ public final class CountryCollectionResponse extends ExecutionResponse {
 
     public void setData(List<Country> data) {
         this.data = data;
+    }
+
+    @Override
+    public DataContainer packToDataContainer() {
+        return new DataContainer()
+            .put("status", status)
+            .put("message", message)
+            .put("response_type", ResponseType.COUNTRY_COLLECTION)
+            .put("data", data);
     }
 }

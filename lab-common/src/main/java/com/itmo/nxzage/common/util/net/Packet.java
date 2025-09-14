@@ -4,13 +4,13 @@ import java.io.Serializable;
 import java.util.UUID;
 import com.itmo.nxzage.common.util.data.DataContainer;
 
-public class PacketWrapper implements Serializable {
+public class Packet implements Serializable {
     private static final long serialVersionUID = 1L;
-    private UUID interactionID;
+    private UUID interactionID; // ? Нужно ли передавать это? 
     private PacketType type;
     private DataContainer payload;
 
-    public PacketWrapper(PacketType type, DataContainer payload) {
+    public Packet(PacketType type, DataContainer payload) {
         this.type = type;
         this.payload = payload;
     }

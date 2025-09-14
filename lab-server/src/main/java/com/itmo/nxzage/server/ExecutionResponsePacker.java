@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.stream.Stream;
 import com.itmo.nxzage.common.util.data.DataContainer;
 import com.itmo.nxzage.common.util.net.PacketType;
-import com.itmo.nxzage.common.util.net.PacketWrapper;
+import com.itmo.nxzage.common.util.net.Packet;
 import com.itmo.nxzage.server.responses.ExecutionResponse;
 
 public class ExecutionResponsePacker {

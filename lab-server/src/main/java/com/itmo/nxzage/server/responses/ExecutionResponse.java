@@ -1,10 +1,12 @@
 package com.itmo.nxzage.server.responses;
 
 import java.io.Serializable;
+import com.itmo.nxzage.common.util.data.DataContainer;
+import com.itmo.nxzage.common.util.net.response.ResponseType;
 
 public sealed class ExecutionResponse implements Serializable permits PersonResponse, NumberResponse, StringResponse, CountryCollectionResponse, PersonCollectionResponse{
-    private String status;
-    private String message;
+    protected String status;
+    protected String message;
 
 
     public String getStatus() {
@@ -21,5 +23,12 @@ public sealed class ExecutionResponse implements Serializable permits PersonResp
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public DataContainer packToDataContainer() {
+        return new DataContainer()
+            .put("status", status)
+            .put("message", message)
+            .put("response_type", ResponseType.DEFAULT);
     }
 }

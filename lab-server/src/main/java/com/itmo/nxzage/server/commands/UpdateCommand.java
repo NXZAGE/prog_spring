@@ -1,6 +1,7 @@
 package com.itmo.nxzage.server.commands;
 
 import com.itmo.nxzage.common.util.data.Person;
+import com.itmo.nxzage.common.util.data.User;
 import com.itmo.nxzage.server.responses.ExecutionResponse;
 import com.itmo.nxzage.server.services.storage.PersonStorageService;
 
@@ -29,4 +30,22 @@ public final class UpdateCommand extends PersonStorageCommand {
         return response;
     }
 
+    @Override
+    public void setUser(User user) {
+        if (this.user != null) {
+            throw new IllegalStateException("User already set");
+        }
+        this.user = user;
+        this.element.setOwner(user);
+    }
+
+    public void checkAccess(PersonStorageService e) throws IllegalAccessException {
+        Person original = e.get(id);
+        if (original == null) {
+            return; 
+        }
+        if (!original.getOwner().equals(this.user)) {
+            throw new IllegalAccessException("Permission denied");
+        }
+    }
 }

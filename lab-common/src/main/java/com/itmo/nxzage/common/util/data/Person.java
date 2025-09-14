@@ -52,6 +52,8 @@ public class Person extends DataElement<Person> {
      */
     private Integer id;
 
+    private User owner;
+
     /**
      * Дата создания записи (автогенерируемая, не null)
      */
@@ -233,6 +235,10 @@ public class Person extends DataElement<Person> {
         return id;
     }
 
+    public User getOwner() {
+        return owner;
+    }
+
     /**
      * Устанавливает уникальный идентификатор
      * 
@@ -240,6 +246,10 @@ public class Person extends DataElement<Person> {
      */
     public void setID(Integer id) {
         this.id = id;
+    }
+
+    public void setOwner(User user) {
+        this.owner = user;
     }
 
     /**
@@ -428,10 +438,10 @@ public class Person extends DataElement<Person> {
     public String toString() {
         String formattedCreationDate = Person.CREATION_DATE_FORMAT.format(creationDate);
         return String.format(
-                "OBJECT PERSON [\n" + "  ID: %d\n" + "  Creation date: %s\n" + "  Name: %s\n"
+                "OBJECT PERSON [\n" + "  ID: %d\n" + "  %s\n" + "  Creation date: %s\n" + "  Name: %s\n"
                         + "  Coordinates: %s\n" + "  Height: %f cm\n" + "  Weight: %d kg\n"
                         + "  Passport ID: %s\n" + "  Nationality: %s\n" + "  Location: %s\n" + "]",
-                id, formattedCreationDate, name, coordinates.toString(), height, weight, passportID,
+                id, owner.toString(), formattedCreationDate, name, coordinates.toString(), height, weight, passportID,
                 nationality.toString(), location.toString());
     }
 
@@ -449,6 +459,7 @@ public class Person extends DataElement<Person> {
             return false;
         Person person = (Person) other;
         return id.equals(person.id) && creationDate.equals(person.creationDate)
+                && owner.equals(person.owner)
                 && name.equals(person.name) && coordinates.equals(person.coordinates)
                 && height.equals(person.height)
                 && (weight == null ? person.weight == null : weight.equals(person.weight))
@@ -475,6 +486,7 @@ public class Person extends DataElement<Person> {
         hash = hash * mod + (passportID != null ? passportID.hashCode() : 0);
         hash = hash * mod + (nationality != null ? nationality.hashCode() : 0);
         hash = hash * mod + (location != null ? location.hashCode() : 0);
+        hash = hash * mod + (owner != null ? owner.hashCode() : 0);
         return hash;
     }
 }

@@ -5,5 +5,6 @@ public enum ResponseType {
     COUNTRY_COLLECTION,
     PERSON_COLLECTION,
     NUMBER,
-    STRINGS
+    STRINGS,
+    PERSON
 }
