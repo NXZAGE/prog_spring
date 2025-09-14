@@ -6,7 +6,6 @@ import com.itmo.nxzage.common.util.data.User;
 import com.itmo.nxzage.common.util.net.Packet;
 import com.itmo.nxzage.common.util.net.PacketType;
 import com.itmo.nxzage.server.commands.PersonStorageCommand;
-import com.itmo.nxzage.server.commands.SaveCommand;
 import com.itmo.nxzage.server.exceptions.AuthenticationException;
 import com.itmo.nxzage.server.exceptions.CommandDeserializeException;
 import com.itmo.nxzage.server.exceptions.CommandRecognitionException;

@@ -3,7 +3,6 @@ package com.itmo.nxzage.client.parsing.forms;
 import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
-import com.itmo.nxzage.client.auth.User;
 import com.itmo.nxzage.client.io.InputManager;
 import com.itmo.nxzage.client.io.OutputHandler;
 import com.itmo.nxzage.client.parsing.fields.Field;

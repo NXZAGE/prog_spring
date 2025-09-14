@@ -1,6 +1,5 @@
 package com.itmo.nxzage.server.services.auth;
 
-import java.sql.SQLException;
 import java.util.NoSuchElementException;
 import java.util.logging.Logger;
 import com.itmo.nxzage.common.util.data.DataContainer;
@@ -13,7 +12,6 @@ import com.itmo.nxzage.server.exceptions.AuthenticationException;
 import com.itmo.nxzage.server.logging.ServerLogger;
 import com.itmo.nxzage.server.services.db.AuthModule;
 import com.itmo.nxzage.server.services.db.models.Credential;
-import com.itmo.nxzage.server.services.storage.PersonStorageService;
 
 public class AuthenticationService {
     private static final String PEPER = "c4a42904c649b1bb0ce1b24275af8224";

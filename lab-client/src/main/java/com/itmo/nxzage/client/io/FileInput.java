@@ -2,9 +2,7 @@ package com.itmo.nxzage.client.io;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.net.InetSocketAddress;
 import java.util.Scanner;
-import com.itmo.nxzage.common.util.data.Person;
 
 public final class FileInput implements InputSource {
     private String filename;

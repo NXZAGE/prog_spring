@@ -4,7 +4,6 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 import com.itmo.nxzage.common.util.data.User;
-import com.itmo.nxzage.server.services.db.DB;
 
 public class UserDAO implements Dao<User> {
 

@@ -3,7 +3,6 @@ package com.itmo.nxzage.server.services.net;
 import com.itmo.nxzage.common.util.net.Packet;
 import com.itmo.nxzage.common.util.net.PacketType;
 import com.itmo.nxzage.server.exceptions.InvalidRequestException;
-import com.itmo.nxzage.server.net.InteractionContext;
 
 public class RequestFilterService {
     public void filter(Packet packet) {

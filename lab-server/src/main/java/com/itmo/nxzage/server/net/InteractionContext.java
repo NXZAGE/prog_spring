@@ -3,7 +3,6 @@ package com.itmo.nxzage.server.net;
 import java.net.InetSocketAddress;
 import java.util.UUID;
 import com.itmo.nxzage.common.util.net.Packet;
-import com.itmo.nxzage.server.responses.ExecutionResponse;
 
 public class InteractionContext {
     private final UUID id;

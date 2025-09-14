@@ -1,11 +1,11 @@
 package com.itmo.nxzage.server.services.db.dao;
 
-import java.lang.reflect.AccessFlag.Location;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
+import com.itmo.nxzage.common.util.data.Location;
 import com.itmo.nxzage.server.logging.ServerLogger;
 import com.itmo.nxzage.server.services.db.DB;
 

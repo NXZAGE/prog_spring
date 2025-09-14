@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.TreeSet;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import com.itmo.nxzage.common.util.data.DataElement;
 import com.itmo.nxzage.common.util.exceptions.CSVParseException;

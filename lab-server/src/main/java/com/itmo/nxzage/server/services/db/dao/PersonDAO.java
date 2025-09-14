@@ -1,6 +1,5 @@
 package com.itmo.nxzage.server.services.db.dao;
 
-import java.security.Timestamp;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
