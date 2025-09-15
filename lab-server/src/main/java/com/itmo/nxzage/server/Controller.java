@@ -21,14 +21,14 @@ import com.itmo.nxzage.server.services.net.CacheService;
 public class Controller {
     private CommandHandler executor;
     private CommandRecognizer recognizer;
-    private CacheService cache;
+    // private CacheService cache;
     private AuthenticationService auth;
     private final Logger logger = ServerLogger.getLogger("Controller");
 
     public Controller(CommandHandler handler) {
         executor = handler;
         recognizer = new CommandRecognizer();
-        cache = new CacheService();
+        // cache = new CacheService();
         auth = new AuthenticationService();
     }
 
@@ -83,9 +83,9 @@ public class Controller {
         if (!interaction.getRequest().getType().equals(PacketType.REQUEST)) {
             throw new IllegalArgumentException("Interaction is not a request");
         }
-        if (cache.hit(interaction)) {
-            return;
-        }
+        // if (cache.hit(interaction)) {
+        //     return;
+        // }
         ExecutionResponse response;
         try {
             User user = auth.auth(interaction.getRequest());
@@ -107,7 +107,7 @@ public class Controller {
         }
         compliteInteraction(interaction, response);
         logger.info("Packed responses added to Interaction Context");
-        cache.memorize(interaction);
+        // cache.memorize(interaction);
     }
 
     private void compliteInteraction(InteractionContext interaction, ExecutionResponse response) {

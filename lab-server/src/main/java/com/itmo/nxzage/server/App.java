@@ -2,6 +2,9 @@ package com.itmo.nxzage.server;
 
 import java.net.SocketException;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.logging.Logger;
 import com.itmo.nxzage.common.util.data.Person;
 import com.itmo.nxzage.common.util.net.Packet;
@@ -70,11 +73,29 @@ public final class App {
     public void run() {
         logger.info("Server started");
         running = true;
+
         while (running) {
+            ExecutorService processorPool = Executors.newCachedThreadPool();
+            ExecutorService senderPool = Executors.newCachedThreadPool();
+
             try {
-                InteractionContext interaction = new InteractionContext(transportService.receiveRequest());  
-                controller.handle(interaction);
-                transportService.sendResponse(interaction.getResponses());
+                InteractionContext interaction = new InteractionContext(
+                    transportService.receiveRequest()
+                );  
+                processorPool.submit(() -> {
+                    try {
+                        controller.handle(interaction);
+                        senderPool.submit(() -> {
+                            try {
+                                transportService.sendResponse(interaction.getResponses());
+                            } catch (Exception e) {
+                                logger.warning("Failed to send response: " + e.getMessage());
+                            }
+                        });
+                    } catch (Exception e) {
+                        logger.warning("Failed to precess: " + e.getMessage());
+                    }
+                });
             } catch (RuntimeException e) {
                 logger.warning("Failed during processing request. Details: " + e.getMessage());
                 e.printStackTrace();

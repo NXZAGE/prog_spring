@@ -1360,3 +1360,121 @@
 [INFO] Storage - Element with id=10 removed
 [INFO] Storage - Element with id=8 removed
 [INFO] Storage - Element with id=9 removed
+[INFO] Storage - Data from the DB successfully loaded. Currents collection size: 6
+[INFO] Storage - Element OBJECT PERSON [
+  ID: 0
+  USER[id: 3, name: 'admin']
+  Creation date: <15.09.2025 12:29:09 MSK>
+  Name: New name
+  Coordinates: Coordinates(8.000000, 8.000000)
+  Height: 1212.000000 cm
+  Weight: 3113 kg
+  Passport ID: passportXXXXXX
+  Nationality: Japanese Empire
+  Location: Location["LOCATION_SDF"](90909.000000, 94545, 90)
+] is valid and ready to be added to the DB
+[INFO] Storage - Element with id=0 added
+[INFO] Storage - Element OBJECT PERSON [
+  ID: 0
+  USER[id: 3, name: 'admin']
+  Creation date: <15.09.2025 12:29:11 MSK>
+  Name: Oh no cringe
+  Coordinates: Coordinates(8943.000000, 343.000000)
+  Height: 232145.000000 cm
+  Weight: 34234234 kg
+  Passport ID: reeeeq3223
+  Nationality: The United States of America
+  Location: Location["missN_SSSSS990"](90909.000000, 9453, 90)
+] is valid and ready to be added to the DB
+[INFO] Storage - Element with id=0 added
+[INFO] Storage - Element OBJECT PERSON [
+  ID: 0
+  USER[id: 3, name: 'admin']
+  Creation date: <15.09.2025 12:29:13 MSK>
+  Name: slutt savage 
+  Coordinates: Coordinates(3438943.000000, 343.000000)
+  Height: 245.435440 cm
+  Weight: 3423423 kg
+  Passport ID: 8PEDeeq3223
+  Nationality: Spain
+  Location: Location["LOCATION_SSSSS990"](90909.000000, 945, 90)
+] is valid and ready to be added to the DB
+[INFO] Storage - Element with id=0 added
+[INFO] Storage - Element OBJECT PERSON [
+  ID: 0
+  USER[id: 3, name: 'admin']
+  Creation date: <15.09.2025 12:30:01 MSK>
+  Name: New name
+  Coordinates: Coordinates(8.000000, 8.000000)
+  Height: 1212.000000 cm
+  Weight: 3113 kg
+  Passport ID: passportXXXXXX
+  Nationality: Japanese Empire
+  Location: Location["LOCATION_SDF"](90909.000000, 94545, 90)
+] is valid and ready to be added to the DB
+[INFO] Storage - Element with id=0 added
+[INFO] Storage - Element OBJECT PERSON [
+  ID: 0
+  USER[id: 3, name: 'admin']
+  Creation date: <15.09.2025 12:30:03 MSK>
+  Name: Oh no cringe
+  Coordinates: Coordinates(8943.000000, 343.000000)
+  Height: 232145.000000 cm
+  Weight: 34234234 kg
+  Passport ID: reeeeq3223
+  Nationality: The United States of America
+  Location: Location["missN_SSSSS990"](90909.000000, 9453, 90)
+] is valid and ready to be added to the DB
+[INFO] Storage - Element with id=0 added
+[INFO] Storage - Element OBJECT PERSON [
+  ID: 0
+  USER[id: 3, name: 'admin']
+  Creation date: <15.09.2025 12:30:05 MSK>
+  Name: slutt savage 
+  Coordinates: Coordinates(3438943.000000, 343.000000)
+  Height: 245.435440 cm
+  Weight: 3423423 kg
+  Passport ID: 8PEDeeq3223
+  Nationality: Spain
+  Location: Location["LOCATION_SSSSS990"](90909.000000, 945, 90)
+] is valid and ready to be added to the DB
+[INFO] Storage - Element with id=0 added
+[INFO] Storage - Element OBJECT PERSON [
+  ID: 0
+  USER[id: 8, name: 'user1']
+  Creation date: <15.09.2025 12:34:54 MSK>
+  Name: New name
+  Coordinates: Coordinates(8.000000, 8.000000)
+  Height: 1212.000000 cm
+  Weight: 3113 kg
+  Passport ID: passportXXXXXX
+  Nationality: Japanese Empire
+  Location: Location["LOCATION_SDF"](90909.000000, 94545, 90)
+] is valid and ready to be added to the DB
+[INFO] Storage - Element with id=0 added
+[INFO] Storage - Element OBJECT PERSON [
+  ID: 0
+  USER[id: 8, name: 'user1']
+  Creation date: <15.09.2025 12:34:57 MSK>
+  Name: Oh no cringe
+  Coordinates: Coordinates(8943.000000, 343.000000)
+  Height: 232145.000000 cm
+  Weight: 34234234 kg
+  Passport ID: reeeeq3223
+  Nationality: The United States of America
+  Location: Location["missN_SSSSS990"](90909.000000, 9453, 90)
+] is valid and ready to be added to the DB
+[INFO] Storage - Element with id=0 added
+[INFO] Storage - Element OBJECT PERSON [
+  ID: 0
+  USER[id: 8, name: 'user1']
+  Creation date: <15.09.2025 12:35:01 MSK>
+  Name: slutt savage 
+  Coordinates: Coordinates(3438943.000000, 343.000000)
+  Height: 245.435440 cm
+  Weight: 3423423 kg
+  Passport ID: 8PEDeeq3223
+  Nationality: Spain
+  Location: Location["LOCATION_SSSSS990"](90909.000000, 945, 90)
+] is valid and ready to be added to the DB
+[INFO] Storage - Element with id=0 added

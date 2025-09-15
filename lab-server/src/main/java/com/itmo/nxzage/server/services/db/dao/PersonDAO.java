@@ -18,7 +18,7 @@ import com.itmo.nxzage.server.logging.ServerLogger;
 import com.itmo.nxzage.server.services.db.DB;
 
 public final class PersonDAO implements Dao<Person> {
-    private final Logger logger = ServerLogger.getLogger("PersonDAO");
+    private static final Logger logger = ServerLogger.getLogger("PersonDAO");
     public Person mapRow(ResultSet rs) throws SQLException {
         Integer id = rs.getInt("id");
         Date creationDate = rs.getTimestamp("creation_date");
@@ -133,6 +133,7 @@ public final class PersonDAO implements Dao<Person> {
     }
 
     @Override
+    // TODO IMPORTANT rollback
     public Integer save(Person element) {
         try (var conn = DB.getConnection()) {
             boolean originalAutoCommit = conn.getAutoCommit();
@@ -158,6 +159,7 @@ public final class PersonDAO implements Dao<Person> {
     }
 
     @Override
+    // TODO IMPORTANT rollback
     public void update(int id, Person element) {
         try (var conn = DB.getConnection()) {
             boolean originalAutoCommit = conn.getAutoCommit();

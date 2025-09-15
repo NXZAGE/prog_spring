@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.logging.Logger;
 import com.itmo.nxzage.common.util.exceptions.PacketSerializationException;
 import com.itmo.nxzage.common.util.net.Packet;
@@ -31,14 +33,14 @@ public class UDPTransportService {
     private final Packetizer packetizer;
     private final Logger logger = ServerLogger.getLogger("UDPTransportService");
     private final Map<UUID, PacketFramesCollector> requestCollectors;
-    private final Set<UUID> readyRequests;
+    private final BlockingQueue<UUID> readyRequests;
     private final ClientRegister clientRegister;
 
     {
         filter = new RequestFilterService();
         packetizer = new Packetizer(MAX_PACKET_SIZE);
         requestCollectors = new HashMap<UUID, PacketFramesCollector>();
-        readyRequests = new HashSet<>();
+        readyRequests = new LinkedBlockingQueue<>();
         clientRegister = new ClientRegister();
     }
 
@@ -76,7 +78,7 @@ public class UDPTransportService {
     // }
 
     public Packet receiveRequest() {
-        while (readyRequests.size() == 0) {
+        while (readyRequests.isEmpty()) {
             byte[] frame = receiveFrame();
             UUID id = Packetizer.getPacketInteractionID(frame);
             PacketFramesCollector collector = requestCollectors.get(id);
@@ -91,7 +93,7 @@ public class UDPTransportService {
             }
         }
         // TODO move while to another method 
-        UUID readyRequestID = readyRequests.iterator().next();
+        UUID readyRequestID = readyRequests.poll();
         var packet = requestCollectors.get(readyRequestID).getPacket();
         requestCollectors.remove(readyRequestID);
         readyRequests.remove(readyRequestID);

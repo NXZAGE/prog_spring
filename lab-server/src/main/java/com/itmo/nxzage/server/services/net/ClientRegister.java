@@ -6,17 +6,18 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
 import com.itmo.nxzage.server.logging.ServerLogger;
 
 public final class ClientRegister {
-    private final Map<UUID, InetSocketAddress> sockets;
-    private final Map<UUID, Date> interactionTimestamp;
+    private final ConcurrentHashMap<UUID, InetSocketAddress> sockets;
+    private final ConcurrentHashMap<UUID, Date> interactionTimestamp;
     private final Logger logger = ServerLogger.getLogger("ClientRegister");
 
     {
-        sockets = new HashMap<>();
-        interactionTimestamp = new HashMap<>();
+        sockets = new ConcurrentHashMap<>();
+        interactionTimestamp = new ConcurrentHashMap<>();
     }
 
     public void registerInteraction(UUID id, InetSocketAddress client) {

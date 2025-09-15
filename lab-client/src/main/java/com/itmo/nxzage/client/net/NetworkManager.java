@@ -10,7 +10,7 @@ import com.itmo.nxzage.common.util.net.PacketType;
 
 public class NetworkManager {
     private static int REQUEST_SENDING_ATTEMPTS_LIMIT = 2;
-    private static int RESPONSE_WAITING_TIME_LIMIT = 2000;
+    private static int RESPONSE_WAITING_TIME_LIMIT = 5000;
     // TODO make static timeout val
     private UDPTransportService transportService;
     // TODO make init
