@@ -15,7 +15,6 @@ import com.itmo.nxzage.server.exceptions.ReadException;
 import com.itmo.nxzage.server.logging.ServerLogger;
 import com.itmo.nxzage.server.services.db.dao.Dao;
 
-// TODO переписать на stream API
 public final class Storage<T extends DataElement<T>> {
     private CSVConverter<T> converter;
     private Dao<T> dao;
@@ -99,7 +98,6 @@ public final class Storage<T extends DataElement<T>> {
             logger.info("Serialized collection ready to dump. Size: " + serializedCollection.length());
             dumpManager.write(serializedCollection);
         } catch (DumpException exc) {
-            // TODO проглатывается exc
             logger.warning("Failed to dump collection");
             return false;
         }
@@ -111,7 +109,7 @@ public final class Storage<T extends DataElement<T>> {
      * Добавляет новый элемент в коллекцию
      * @param element новый элемент
      */
-    public void add(T element) {
+    public synchronized void add(T element) {
         if (element == null) {
             throw new IllegalArgumentException("New element can\'t be null");
         }
@@ -137,7 +135,7 @@ public final class Storage<T extends DataElement<T>> {
      * @param id
      * @return элемент с заданным id, null, если такого не существует
      */
-    public T get(Integer id) {
+    public synchronized T get(Integer id) {
         if (id == null) {
             throw new IllegalArgumentException("Id can\'t be null");
         }
@@ -159,7 +157,7 @@ public final class Storage<T extends DataElement<T>> {
      * @param reversed true, если нужно вернуть коллекцию в порядке убывания
      * @return отсортированную коллекцию
      */
-    public Stream<T> getAll(boolean reversed) {
+    public synchronized Stream<T> getAll(boolean reversed) {
         if (reversed) {
             return collection.descendingSet().stream();
         } else {
@@ -173,7 +171,7 @@ public final class Storage<T extends DataElement<T>> {
      * @param id 
      * @return true, если удалось удалить
      */
-    public boolean remove(Integer id) {
+    public synchronized boolean remove(Integer id) {
         T element = this.get(id);
         if (element == null) {
             return false;
@@ -200,7 +198,7 @@ public final class Storage<T extends DataElement<T>> {
     /**
      * Очищает коллекцию
      */
-    public void clear() {
+    public synchronized void clear() {
         this.collection.clear();
         logger.info("Collection cleared");
     }
@@ -211,7 +209,7 @@ public final class Storage<T extends DataElement<T>> {
      * @param newElement новые значения
      * @return true, если удалось изменить
      */
-    public boolean update(Integer id, T newElement) {
+    public synchronized boolean update(Integer id, T newElement) {
         if (id == null) {
             throw new IllegalArgumentException("ID can\'t bw null");
         }
@@ -239,7 +237,7 @@ public final class Storage<T extends DataElement<T>> {
      * @return строка, содержащая дату создания, тип хранимых объектов, количество элементов, id
      *         минимального элемента, id максимального элемента
      */
-    public String info() {
+    public synchronized String info() {
         var info = String.format("Collection: TreeSet| {%d} elements | min id: {%d} | max id: {%d}",
          collection.size(), isEmpty() ? -1 : min().getID(), isEmpty() ? -1 : max().getID() );
         return info;
@@ -251,7 +249,7 @@ public final class Storage<T extends DataElement<T>> {
      * @return минимальный элемент
      * @throws NoSuchElementException если коллекция пустая
      */
-    public T min() {
+    public synchronized T min() {
         return collection.first();
     }
 
@@ -261,7 +259,7 @@ public final class Storage<T extends DataElement<T>> {
      * @return максимальный элемент коллекции
      * @return NoSuchElementException если коллекция пустая
      */
-    public T max() {
+    public synchronized T max() {
         return collection.last();
     }
 
@@ -270,7 +268,7 @@ public final class Storage<T extends DataElement<T>> {
      * 
      * @return true, если коллекция пустая
      */
-    public boolean isEmpty() {
+    public synchronized boolean isEmpty() {
         return collection.isEmpty();
     }
 }

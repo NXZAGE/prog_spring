@@ -62,7 +62,6 @@ public class ExecutionResponsePrinter {
     }
 
     public void handle(DataContainer response) {
-        // TODO realisation
         response.assertType("response_type", ResponseType.class);
         response.assertType("status", String.class);
         response.assertType("message", String.class);

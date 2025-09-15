@@ -38,7 +38,34 @@ public class AuthModule {
     }
 
     public Credential getUserCredentials(String username) {
-        throw new UnsupportedOperationException();
+        String sql = """
+            SELECT 
+                credentials.user_id AS id,
+                credentials.password_hash AS passport_hash
+                credentials.salt AS salt
+            FROM
+                credentials
+            JOIN
+                users
+            ON
+                users.id=credentials.user_id
+            WHERE
+                users.name=?
+
+        """;
+        try (var conn = DB.getConnection();
+            var stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, username);
+            try (var rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return new Credential(rs.getInt("id"), rs.getString("password_hash"), rs.getString("salt"));
+                } else {
+                    throw new NoSuchElementException("There is no credential data for user with username=%s".formatted(username));
+                }
+            }
+        } catch (SQLException e) {
+            throw new NoSuchElementException("There is no credential data for user with username=%s".formatted(username));
+        }
     }
 
     public Credential getUserCredentials(Integer id) {

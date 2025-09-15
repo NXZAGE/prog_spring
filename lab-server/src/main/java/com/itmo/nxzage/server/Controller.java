@@ -13,7 +13,6 @@ import com.itmo.nxzage.server.logging.ServerLogger;
 import com.itmo.nxzage.server.net.InteractionContext;
 import com.itmo.nxzage.server.responses.ExecutionResponse;
 import com.itmo.nxzage.server.services.auth.AuthenticationService;
-import com.itmo.nxzage.server.services.net.CacheService;
 
 /**
  * Контроллер, который обрабатывает запрос и дилигирует исполнение
@@ -59,7 +58,6 @@ public class Controller {
     }
 
     private void handleRegisterRequest(InteractionContext interaction) {
-        // TODO realise
         if (!interaction.getRequest().getType().equals(PacketType.REGISTER_REQUEST)) {
             throw new IllegalArgumentException("Interaction is not a register request");
         }

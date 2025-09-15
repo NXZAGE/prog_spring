@@ -20,7 +20,7 @@ public class PersonStorageService extends BaseStorageService<Person> {
      * @param element новый элемент
      * @return true, если произошло добавление
      */
-    public synchronized boolean addIfMin(Person element) {
+    public boolean addIfMin(Person element) {
         if (storage.isEmpty() || element.compareTo(storage.min()) < 0) {
             storage.add(element);
             return true;
@@ -34,7 +34,7 @@ public class PersonStorageService extends BaseStorageService<Person> {
      * @param element новый элемент
      * @return true, если произошло добавление
      */
-    public synchronized boolean addIfMax(Person element) {
+    public boolean addIfMax(Person element) {
         if (storage.isEmpty() || element.compareTo(storage.max()) > 0) {
             storage.add(element);
             return true;
@@ -47,7 +47,7 @@ public class PersonStorageService extends BaseStorageService<Person> {
      * @param reference заданный элемент
      * @return количество удаленных элементов
      */
-    public synchronized int removeLower(Person reference, Integer owner_id) {
+    public int removeLower(Person reference, Integer owner_id) {
         List<Person> toRemove = storage.getAll(false)
                 .filter((element) -> element.getOwner().getId().equals(owner_id))
             .takeWhile((element) -> (element.compareTo(reference) < 0)).toList();
@@ -59,7 +59,7 @@ public class PersonStorageService extends BaseStorageService<Person> {
      * Возвращает коллекцию со значениями nationality отсортированной по возрастанию коллекции
      * @return коллекция со значениями nationality
      */
-    public synchronized Collection<Country> getNationalityAscending() {
+    public Collection<Country> getNationalityAscending() {
         return storage.getAll(false).map((element) -> element.getNationality()).toList();
     }
 
@@ -67,7 +67,7 @@ public class PersonStorageService extends BaseStorageService<Person> {
      * Возвращает коллекцию со значением nationality отсортированной по убыванию коллекции 
      * @return коллекция со значениями nationality
      */
-    public synchronized Collection<Country> getNationalityDescending() {
+    public Collection<Country> getNationalityDescending() {
         return storage.getAll(true).map((element) -> element.getNationality()).toList();
     }
 
@@ -76,17 +76,17 @@ public class PersonStorageService extends BaseStorageService<Person> {
      * @param prefix префикс для фильтрации
      * @return коллекцию элементов, passportID которых начинается с prefix
      */
-    public synchronized Collection<Person> filterPassportIDPrefix(String prefix) {
+    public Collection<Person> filterPassportIDPrefix(String prefix) {
         return storage.getAll(false)
                 .filter((element) -> element.getPassportID().startsWith(prefix)).toList();
     }
 
     @Override
-    public synchronized void clear() {
+    public void clear() {
         throw new UnsupportedOperationException("Method clear shoud be supplied with ownerId argument");
     }
 
-    public synchronized void clear(Integer ownerId) {
+    public void clear(Integer ownerId) {
         List<Person> toRemove = storage.getAll(false)
                 .filter((element) -> element.getOwner().getId().equals(ownerId))
                 .toList();

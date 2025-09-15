@@ -133,7 +133,6 @@ public final class PersonDAO implements Dao<Person> {
     }
 
     @Override
-    // TODO IMPORTANT rollback
     public Integer save(Person element) {
         try (var conn = DB.getConnection()) {
             boolean originalAutoCommit = conn.getAutoCommit();
@@ -147,7 +146,11 @@ public final class PersonDAO implements Dao<Person> {
             } catch (SQLException e) {
                 logger.warning("Transaction failed: SQlException occured: " + e.getMessage());
                 e.printStackTrace();
+                conn.rollback();
                 throw new RuntimeException(e);
+            } catch (Exception e) {
+                conn.rollback();
+                throw e;  
             } finally {
                 conn.setAutoCommit(originalAutoCommit);
             }
@@ -159,20 +162,22 @@ public final class PersonDAO implements Dao<Person> {
     }
 
     @Override
-    // TODO IMPORTANT rollback
     public void update(int id, Person element) {
         try (var conn = DB.getConnection()) {
             boolean originalAutoCommit = conn.getAutoCommit();
             conn.setAutoCommit(false);
 
-            // TODO перепеисать на updateCoordinates updateLocation
             try {
                 int coordinatesId = saveCoordinates(conn, element.getCoordinates());
                 int locationId = saveLocation(conn, element.getLocation());
                 updatePerson(conn, id, element, coordinatesId, locationId);
             } catch (SQLException e) {
                 logger.info("Failed update person: " + e.getMessage());
+                conn.rollback();
                 throw new RuntimeException(e);   
+            } catch (Exception e) {
+                conn.rollback();
+                throw e;  
             } finally {
                 conn.setAutoCommit(originalAutoCommit);
             }

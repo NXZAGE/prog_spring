@@ -3,7 +3,6 @@ package com.itmo.nxzage.server.services.storage;
 import java.util.Collection;
 import com.itmo.nxzage.common.util.data.DataElement;
 import com.itmo.nxzage.server.Storage;
-import com.itmo.nxzage.server.services.db.dao.Dao;
 
 /**
  * Универсальный сервис Storage с базовым интерфейсом (CRUD операции)
@@ -13,7 +12,6 @@ public class BaseStorageService<T extends DataElement<T>> {
 
     public BaseStorageService(Storage<T> storage) {
         this.storage = storage;
-        // TODO синхронизация с дао
     }
 
     /**
@@ -21,7 +19,7 @@ public class BaseStorageService<T extends DataElement<T>> {
      * @param id 
      * @return элемент с заданным id
      */
-    public synchronized T get(Integer id) {
+    public T get(Integer id) {
         return storage.get(id);
     }
 
@@ -29,7 +27,7 @@ public class BaseStorageService<T extends DataElement<T>> {
      * Возвращает полную отсортированную по возврастанию коллекцию
      * @return отсортированная по возрастанию коллекция
      */
-    public synchronized Collection<T> getCollection() {
+    public Collection<T> getCollection() {
         return storage.getAll(true).toList();
     }
 
@@ -37,7 +35,7 @@ public class BaseStorageService<T extends DataElement<T>> {
      * Возвращает полную отсортированную по убыванию коллекцию
      * @return отсортированная по убыванию коллекция
      */
-    public synchronized Collection<T> getReversedCollection() {
+    public Collection<T> getReversedCollection() {
         return storage.getAll(false).toList();
     }
 
@@ -47,7 +45,7 @@ public class BaseStorageService<T extends DataElement<T>> {
      * @param value эталон
      * @return true, если произошло обновление
      */
-    public synchronized boolean update(Integer id, T value) {
+    public boolean update(Integer id, T value) {
         return storage.update(id, value);
     }
 
@@ -55,7 +53,7 @@ public class BaseStorageService<T extends DataElement<T>> {
      * Добавляет заданный элемент в коллекцию
      * @param element новый элемент
      */
-    public synchronized void add(T element) {
+    public void add(T element) {
         storage.add(element);
     }
 
@@ -64,7 +62,7 @@ public class BaseStorageService<T extends DataElement<T>> {
      * @param id
      * @return true, если элемент был удален
      */
-    public synchronized boolean remove(Integer id) {
+    public boolean remove(Integer id) {
         return storage.remove(id);
     }
 
@@ -74,7 +72,7 @@ public class BaseStorageService<T extends DataElement<T>> {
      * 
      * @return общую информацию о коллекции
      */
-    public synchronized String info() {
+    public String info() {
         return storage.info();
     }
 
@@ -88,7 +86,7 @@ public class BaseStorageService<T extends DataElement<T>> {
     /**
      * Очищает коллекцию
      */
-    public synchronized void clear() {
+    public void clear() {
         storage.clear();
     }
 }

@@ -2,13 +2,10 @@ package com.itmo.nxzage.server;
 
 import java.net.SocketException;
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Logger;
 import com.itmo.nxzage.common.util.data.Person;
-import com.itmo.nxzage.common.util.net.Packet;
-import com.itmo.nxzage.common.util.serialization.PersonConverter;
 import com.itmo.nxzage.server.logging.ServerLogger;
 import com.itmo.nxzage.server.net.InteractionContext;
 import com.itmo.nxzage.server.responses.ExecutionResponse;
@@ -87,7 +84,7 @@ public final class App {
                         controller.handle(interaction);
                         senderPool.submit(() -> {
                             try {
-                                transportService.sendResponse(interaction.getResponses());
+                                transportService.sendResponse(interaction.getResponse());
                             } catch (Exception e) {
                                 logger.warning("Failed to send response: " + e.getMessage());
                             }

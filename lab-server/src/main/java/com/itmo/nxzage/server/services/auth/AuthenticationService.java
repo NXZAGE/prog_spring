@@ -34,13 +34,11 @@ public class AuthenticationService {
         String username = payload.get("username", String.class);
         String password = payload.get("user_password", String.class);
         
-        // TODO вот тут переписать на транзакцию 
-        Integer id = checkUserExisted(username); 
-        Credential credential = getCredentials(id);    
+        Credential credential = getCredentials(username);    
         String passwordHash = getPasswordHash(password, credential.getSalt()); 
         if (passwordHash.equals(credential.getPasswordHash())) {
             logger.info("Request %s authenticated successfully!".formatted(request.getInteractionID().toString()));
-            return new User(id, username);
+            return new User(credential.getUserId(), username);
         } else {
             logger.info("Request %s authentication failed: wrong password".formatted(request.getInteractionID().toString()));
             throw new AuthenticationException("Authentication failed: wrong password");
@@ -71,6 +69,15 @@ public class AuthenticationService {
             return authDataModule.getUserCredentials(id);
         } catch (NoSuchElementException e) {
             logger.warning("Failed to get credentials by id=%d".formatted(id));
+            throw new AuthenticationException("Failed to get credentials");
+        }
+    }
+
+    private Credential getCredentials(String username) throws AuthenticationException {
+        try {
+            return authDataModule.getUserCredentials(username);
+        } catch (NoSuchElementException e) {
+            logger.warning("Failed to get credentials by username=%s".formatted(username));
             throw new AuthenticationException("Failed to get credentials");
         }
     }

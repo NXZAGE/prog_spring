@@ -6,10 +6,8 @@ import java.net.DatagramSocket;
 import java.net.InetSocketAddress;
 import java.net.SocketException;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -17,12 +15,10 @@ import java.util.logging.Logger;
 import com.itmo.nxzage.common.util.exceptions.PacketSerializationException;
 import com.itmo.nxzage.common.util.net.Packet;
 import com.itmo.nxzage.common.util.net.PacketHeader;
-import com.itmo.nxzage.common.util.net.response.DTO.ResponseDTO;
 import com.itmo.nxzage.common.util.serialization.Packetizer;
 import com.itmo.nxzage.common.util.serialization.SerializationUtil;
 import com.itmo.nxzage.server.exceptions.InvalidRequestException;
 import com.itmo.nxzage.server.logging.ServerLogger;
-import com.itmo.nxzage.server.net.InteractionContext;
 import com.itmo.nxzage.server.net.PacketFramesCollector;
 
 public class UDPTransportService {
@@ -138,7 +134,6 @@ public class UDPTransportService {
     }
 
     public void sendResponse(Packet response) {
-        // TODO realise
         UUID id = response.getInteractionID();
         InetSocketAddress address = clientRegister.getClientAddress(id);
         // ResponseType responseType = 

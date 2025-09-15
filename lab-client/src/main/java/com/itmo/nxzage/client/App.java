@@ -217,6 +217,7 @@ public class App {
                 processCommand(parser.get());
             } catch (Exception e) {
                 // TODO убрать говно
+                out.printError("Failed to process command: " + e.getMessage());
                 e.printStackTrace();
             }
         }

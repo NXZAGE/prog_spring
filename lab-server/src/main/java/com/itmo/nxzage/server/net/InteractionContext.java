@@ -1,12 +1,10 @@
 package com.itmo.nxzage.server.net;
 
-import java.net.InetSocketAddress;
 import java.util.UUID;
 import com.itmo.nxzage.common.util.net.Packet;
 
 public class InteractionContext {
     private final UUID id;
-    private final InetSocketAddress clientAddress = null; // !UNUSED
     private final Packet request;
     private Packet response;
 
@@ -28,8 +26,7 @@ public class InteractionContext {
         return request;
     }
 
-    // TODO rename
-    public Packet getResponses() {
+    public Packet getResponse() {
         return response;
     }
 
