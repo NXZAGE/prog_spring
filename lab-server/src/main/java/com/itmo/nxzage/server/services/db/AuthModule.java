@@ -41,7 +41,7 @@ public class AuthModule {
         String sql = """
             SELECT 
                 credentials.user_id AS id,
-                credentials.password_hash AS passport_hash
+                credentials.password_hash AS passport_hash,
                 credentials.salt AS salt
             FROM
                 credentials
@@ -50,7 +50,7 @@ public class AuthModule {
             ON
                 users.id=credentials.user_id
             WHERE
-                users.name=?
+                users.username=?
 
         """;
         try (var conn = DB.getConnection();
