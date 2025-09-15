@@ -41,7 +41,7 @@ public class AuthModule {
         String sql = """
             SELECT 
                 credentials.user_id AS id,
-                credentials.password_hash AS passport_hash,
+                credentials.password_hash AS password_hash,
                 credentials.salt AS salt
             FROM
                 credentials
@@ -60,10 +60,12 @@ public class AuthModule {
                 if (rs.next()) {
                     return new Credential(rs.getInt("id"), rs.getString("password_hash"), rs.getString("salt"));
                 } else {
+
                     throw new NoSuchElementException("There is no credential data for user with username=%s".formatted(username));
                 }
             }
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new NoSuchElementException("There is no credential data for user with username=%s".formatted(username));
         }
     }

@@ -1478,3 +1478,6 @@
   Location: Location["LOCATION_SSSSS990"](90909.000000, 945, 90)
 ] is valid and ready to be added to the DB
 [INFO] Storage - Element with id=0 added
+[INFO] Storage - Data from the DB successfully loaded. Currents collection size: 21
+[INFO] Storage - Data from the DB successfully loaded. Currents collection size: 21
+[INFO] Storage - Data from the DB successfully loaded. Currents collection size: 21
